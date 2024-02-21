@@ -1,8 +1,7 @@
-import { ProductDao, TransactionDao } from "../daos/index.js";
+import { ProductDao } from "../daos/index.js";
 import { ERROR, joiValidator } from "../utils/index.js";
 
 const ProductApi = new ProductDao();
-const TransactionApi = new TransactionDao();
 
 class ProductController {
   static async getProducts(req, res) {
@@ -20,6 +19,7 @@ class ProductController {
     try {
       const productID = req.params.id;
       const product = await ProductApi.getById(productID);
+      console.log(product)
       if (!product || product.kind)
         return res
           .status(404)
@@ -34,7 +34,7 @@ class ProductController {
 
   static async createProduct(req, res) {
     try {
-      const { nombre, descripcion, codigo, foto, precio, stock, categoria, marca } = req.body;
+      const { nombre, descripcion, codigo, foto, precio, stock, categoria } = req.body;
       const product = await joiValidator.product.validateAsync({
         nombre,
         descripcion,
@@ -42,10 +42,8 @@ class ProductController {
         foto,
         precio,
         stock,
-        categoria,
-        marca
+        categoria
       });
-      product.stockComprometido = 0
       const productSaved = await ProductApi.save(product);
       res.send(productSaved);
     } catch (error) {
@@ -62,22 +60,22 @@ class ProductController {
   static async updateProduct(req, res) {
     try {
       const { id } = req.params;
-      const { nombre, descripcion, codigo, foto, precio, categoria, marca } = req.body;
+      
+      const { nombre, descripcion, codigo, foto, precio, categoria } = req.body;
       const product = await joiValidator.product.validateAsync({
         nombre,
         descripcion,
         codigo,
         foto,
         precio,
-        categoria,
-        marca
+        categoria
       });
-      const productSaved = await ProductApi.updateById(id, product);
+      const productSaved = await ProductApi.update(id, product);
       if (!productSaved || productSaved.kind)
         return res
           .status(404)
           .send({ status: "error", error: ERROR.MESSAGE.NO_PRODUCT });
-      res.send(productSaved);
+      res.send({ success: "actualizado correctamente" });
     } catch (error) {
       if (error._original)
         return res
@@ -93,7 +91,8 @@ class ProductController {
     try {
       const productID = req.params.id;
       const response = await ProductApi.deleteById(productID);
-      if (!response || response.kind)
+      console.log(response)
+      if (response == 0 || response.kind)
         return res
           .status(404)
           .send({ status: "error", error: ERROR.MESSAGE.NO_PRODUCT });
@@ -126,10 +125,6 @@ class ProductController {
         return res
           .status(404)
           .send({ status: "error", error: ERROR.MESSAGE.NO_PRODUCT });
-      await TransactionApi.save({
-        tipoMovimiento: "Actualización de stock",
-        usuario: req.session.user.usuario,
-      })
       res.send(productSaved);
     } catch (error) {
       res

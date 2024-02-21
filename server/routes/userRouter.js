@@ -5,7 +5,7 @@ import { getUsers, changeActiveUser, updateUser, getUserById } from "../controll
 const userRouter = Router();
 
 userRouter.get('/', Admin, getUsers);
-userRouter.get('/:id', Admin, getUserById);
+userRouter.get('/:id', getUserById);
 userRouter.put('/activo/:id', Admin, changeActiveUser)
 userRouter.put('/:id', Admin, updateUser)
 

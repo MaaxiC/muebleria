@@ -21,28 +21,26 @@ const validateSignIn = async (req, res, next) => {
     if (!user) {
       return res.status(404).send({ status: "error", error: info.message });
     }
+    const { nombre, apellido, email, usuario, fechaNacimiento, direccion, telefono, dni, genero, activo, id, createdAt } = user[0];
     req.session.user = {
-      nombre: user.nombre,
-      apellido: user.apellido,
-      email: user.email,
-      usuario: user.usuario,
-      fechaNacimiento: user.fechaNacimiento,
-      direccion: user.direccion,
-      telefono: user.telefono,
-      dni: user.dni,
-      roles: user.roles,
-      genero: user.genero,
-      activo: user.activo,
-      id: user.id,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
+      nombre,
+      apellido,
+      email,
+      usuario,
+      fechaNacimiento,
+      direccion,
+      telefono,
+      dni,
+      genero,
+      activo,
+      id,
+      createdAt
     };
     next();
   })(req, res, next);
 };
 
 const signIn = async (req, res) => {
-//  res.send({ status: "success", payload: req.session.user.id });
   res.send({ status: "success", payload: req.session.user });
 };
 

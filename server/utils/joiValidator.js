@@ -8,7 +8,6 @@ const product = joi.object({
   precio: joi.number().min(100).required(),
   stock: joi.number().integer(),
   categoria: joi.string().min(2).max(100).required(),
-  marca: joi.string().min(2).max(100).required(),
 });
 
 const user = joi.object({
@@ -21,7 +20,6 @@ const user = joi.object({
   direccion: joi.string().min(5).max(100).required(),
   telefono: joi.string().regex(/^[0-9]{10}$/).messages({'string.pattern.base': `Telefono debe tener 10 digitos`}).required(),
   dni: joi.number().integer().min(10000000).max(99999999).required(),
-  roles: joi.array(),
   genero: joi.string().min(1).max(100).required(),
   activo: joi.boolean().required(),
 });
@@ -34,20 +32,4 @@ const updateUser = joi.object({
   genero: joi.string().min(1).max(100),
 });
 
-const provider = joi.object({
-  cuit: joi.number().integer().min(10000000000).max(99999999999).required(),
-  razonSocial: joi.string().min(2).max(100).required(),
-  direccion: joi.string().min(5).max(100).required(),
-  telefono: joi.string().regex(/^[0-9]{10}$/).messages({'string.pattern.base': `Telefono debe tener 10 digitos`}),
-  email: joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com'] } }).required(),
-  observacion: joi.string().min(2).max(200),
-});
-
-const updateProvider = joi.object({
-  direccion: joi.string().min(5).max(100),
-  telefono: joi.string().regex(/^[0-9]{10}$/).messages({'string.pattern.base': `Telefono debe tener 10 digitos`}),
-  email: joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com'] } }),
-  observacion: joi.string().min(2).max(200),
-});
-
-export const joiValidator = { product, user, updateUser, provider, updateProvider };
+export const joiValidator = { product, user, updateUser };

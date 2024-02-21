@@ -1,34 +1,34 @@
-import { MongoContainer } from "../api/index.js";
+import knex from 'knex'
 import { config } from "../config/config.js";
-import { UserSchema } from "../models/index.js";
+import { SqldbContainer } from '../api/sqldbContainer.js'
 
-class UserDao extends MongoContainer {
-  constructor() {
-    super({ collection: config.collection.users, schema: UserSchema });
+class UserDao extends SqldbContainer {
+  constructor() { 
+    super(knex(config.SQL_DB), config.collection.users);
   }
 
-  async getAll() {
-    return await this.collection.find({}, { "password": 0 });
-  }
-
-  async getById(id) {
+  static async getByUser(user) {
     try {
-      return await this.collection.findById(id, { "password": 0 });
-    } catch (error) {
-      return error;
-    }
+      const row = await knex(config.SQL_DB).from(config.collection.users).select('*').where('usuario', user)
+      if (row == 0) {
+          return undefined 
+      }
+      return row
+   } catch (error) {
+      return error
+   }
   }
 
-  async updateById(id, data) {
+  static async getByEmail(email) {
     try {
-      const response = await this.collection.findByIdAndUpdate(id, data, {
-        fields: { "password": 0 },
-        new: true,
-      });
-      return response;
-    } catch (error) {
-      return error;
-    }
+      const row = await knex(config.SQL_DB).from(config.collection.users).select('*').where('email', email)
+      if (row == 0) {
+          return undefined 
+      }
+      return row
+   } catch (error) {
+      return error
+   }
   }
 }
 

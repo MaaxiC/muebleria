@@ -1,3 +1,4 @@
+import { parse } from "dotenv";
 import { UserDao } from "../daos/index.js";
 import { ERROR, joiValidator } from "../utils/index.js";
 
@@ -33,12 +34,20 @@ const getUserById = async (req, res) => {
 const changeActiveUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const userSaved = await UserApi.updateById(id, req.body);
-    if (!userSaved || userSaved.kind)
+    const isActive = req.body.activo;
+    if (isActive !== 0 && isActive !== 1)
+      return res
+        .status(400)
+        .send({ status: "error", error: ERROR.MESSAGE.INVALID_ACTIVE });
+    const user = await UserApi.update(id, req.body);
+    if (!user || user.kind)
       return res
         .status(404)
         .send({ status: "error", error: ERROR.MESSAGE.NO_USER });
-    res.send(userSaved);
+    res.send({
+      status: "success",
+      response: "estado actualizado correctamente",
+    });
   } catch (error) {
     res
       .status(500)
@@ -50,6 +59,7 @@ const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
     const { nombre, apellido, direccion, telefono, genero } = req.body;
+    console.log(id, req.body);
     const user = await joiValidator.updateUser.validateAsync({
       nombre,
       apellido,
@@ -57,12 +67,15 @@ const updateUser = async (req, res) => {
       telefono,
       genero,
     });
-    const userSaved = await UserApi.updateById(id, user);
+    const userSaved = await UserApi.update(id, user);
     if (!userSaved || userSaved.kind)
       return res
         .status(404)
         .send({ status: "error", error: ERROR.MESSAGE.NO_USER });
-    res.send(userSaved);
+    res.send({
+      status: "success",
+      response: "usuario actualizado correctamente",
+    });
   } catch (error) {
     if (error._original)
       return res

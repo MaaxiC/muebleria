@@ -1,10 +1,10 @@
-import { MongoContainer } from "../api/index.js";
+import knex from 'knex'
 import { config } from "../config/config.js";
-import { ProductSchema } from "../models/index.js";
+import { SqldbContainer } from '../api/sqldbContainer.js'
 
-class ProductDao extends MongoContainer {
+class ProductDao extends SqldbContainer {
   constructor() {
-    super({ collection: config.collection.products, schema: ProductSchema });
+    super(knex(config.SQL_DB), config.collection.products);
   }
 }
 

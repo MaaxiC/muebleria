@@ -1,12 +1,7 @@
 import passport from "passport";
 import local from "passport-local";
-import { RoleModel, UserModel } from "../models/index.js";
-import bcrypt from "bcrypt";
-
-const createHash = (password) =>
-  bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-const validatePassword = (user, password) =>
-  bcrypt.compareSync(password, user.password);
+import { UserDao } from "../daos/userDao.js";
+import { createHash, validatePassword } from "../utils.js";
 
 const LocalStrategy = local.Strategy;
 const initializePassport = () => {
@@ -16,51 +11,20 @@ const initializePassport = () => {
       { passReqToCallback: true, usernameField: "usuario" },
       async (req, usuario, password, done) => {
         try {
-          const {
-            nombre,
-            apellido,
-            email,
-            fechaNacimiento,
-            direccion,
-            telefono,
-            dni,
-            roles,
-            genero,
-            activo,
-          } = req.body;
-          const exists = await UserModel.findOne({
-            $or: [{ usuario }, { email }],
-          });
-          if (exists) {
+          const existsUsername = await UserDao.getByUser(usuario);
+          if (existsUsername) {
             return done(null, false);
           }
-          const newUser = new UserModel({
-            nombre,
-            apellido,
-            email,
-            password: createHash(password),
-            fechaNacimiento,
-            direccion,
-            telefono,
-            usuario,
-            dni,
-            genero,
-            activo,
-          });
-          if (roles) {
-            const foundRoles = await RoleModel.find({ nombre: { $in: roles } });
-            if (foundRoles.length > 0) {
-              newUser.roles = foundRoles.map((role) => role.id);
-            } else {
-              const defaultRole = await RoleModel.findOne({ nombre: "usuario" });
-              newUser.roles = [defaultRole.id];
-            }
-          } else {
-            const role = await RoleModel.findOne({ nombre: "usuario" });
-            newUser.roles = [role.id];
+          const existsEmail = await UserDao.getByEmail(req.body.email);
+          if (existsEmail) {
+            return done(null, false);
           }
-          const result = await newUser.save();
-          return done(null, result);
+          req.body.usuario = usuario;
+          req.body.password = createHash(password);
+          const UserApi = new UserDao();
+          const savedUser = await UserApi.save(req.body);
+          req.body.id = savedUser[0].id
+          return done(null, req.body);
         } catch (error) {
           return done(error);
         }
@@ -74,13 +38,13 @@ const initializePassport = () => {
       { usernameField: "usuario" },
       async (usuario, password, done) => {
         try {
-          const user = await UserModel.findOne({ usuario }).populate("roles");
+          const user = await UserDao.getByUser(usuario);
           if (!user) {
             return done(null, false, {
               message: "no existe el usuario en la base de datos",
             });
           }
-          if (!validatePassword(user, password)) {
+          if (!validatePassword(user[0], password)) {
             return done(null, false, { message: "contraseña incorrecta" });
           }
           return done(null, user);
@@ -92,12 +56,11 @@ const initializePassport = () => {
   );
 
   passport.serializeUser((user, done) => {
-    done(null, user.id);
+    return done(null, user.usuario);
   });
 
-  passport.deserializeUser(async (id, done) => {
-    const result = await UserModel.findOne({ id });
-    return done(null, result);
+  passport.deserializeUser(async (user, done) => {
+    return done(null, user);
   });
 };
 

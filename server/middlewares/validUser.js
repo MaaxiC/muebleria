@@ -2,6 +2,7 @@ import { joiValidator, ERROR } from "../utils/index.js";
 
 const validUser = async (req, res, next) => {
   try {
+    
     const {
       nombre,
       apellido,
@@ -12,7 +13,6 @@ const validUser = async (req, res, next) => {
       direccion,
       telefono,
       dni,
-      roles,
       genero,
       activo,
     } = req.body;
@@ -26,7 +26,6 @@ const validUser = async (req, res, next) => {
       direccion,
       telefono,
       dni,
-      roles,
       genero,
       activo,
     });

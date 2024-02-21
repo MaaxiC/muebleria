@@ -1,11 +1,14 @@
-import { initializeMongoDB } from "./database.js";
 import { config } from "./config/config.js";
-import { createRoles } from "./libs/initialSetup.js";
 import app from "./app.js";
+import { initialSetup } from "./libs/initialSetup.js";
 
 //Inicializacion
-initializeMongoDB();
-createRoles();
+let firstRun = true; //Cambiar a false para que se inicialice la base de datos
+
+if (!firstRun) {
+    await initialSetup();
+    firstRun = true;
+}
 
 //Servidor
 app.listen(config.server.PORT);
