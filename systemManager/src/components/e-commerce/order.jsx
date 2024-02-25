@@ -15,9 +15,11 @@ export function Order() {
     try {
       if (estado === "Confirmado") {
         await updateOrder(id, { estado: "Confirmado" });
+        window.location.reload();
         return alert("Orden confirmada correctamente"); //Cambiar por SweetAlert
       }
       await updateOrder(id, { estado: "Rechazado" });
+      window.location.reload();
       alert("Orden rechazada correctamente"); //Cambiar por SweetAlert
     } catch (error) {
       alert(error.response.data.error);
@@ -51,7 +53,11 @@ export function Order() {
                 <td>{orden.apellido}</td>
                 <td>{orden.dni}</td>
                 <td>{orden.created_at}</td>
-                <td>{orden.productos}</td>
+                <td>{JSON.parse(orden.productos).map(producto => (
+                  <ul key={producto.id}>
+                    <li>{`${producto.nombre} x ${producto.cantidad} cant.`}</li>
+                  </ul>
+                ))}</td>
                 <td>{orden.montoTotal}</td>
                 <td>{orden.estado}</td>
                 <td>
@@ -76,7 +82,6 @@ export function Order() {
                     onClick={() => {
                       setModalEditShow(true);
                       setOrder(orden);
-                      console.log(orden);
                     }}
                   >
                     Editar Orden
