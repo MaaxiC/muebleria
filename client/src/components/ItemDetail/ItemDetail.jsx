@@ -55,7 +55,7 @@ const ItemDetail = () => {
 
   const addToCart = () => {
     if ((data.stock - data.stockComprometido) >= (quantity + qty)) {
-      increaseCartQuantity(itemId, qty)
+      increaseCartQuantity(parseInt(itemId), qty)
       navigate('/cart')
     } 
   }

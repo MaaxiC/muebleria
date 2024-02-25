@@ -48,63 +48,19 @@ class OrderController {
 
   static async createOrder(req, res) {
     try {
-      const { email, productos, montoTotal, dni, nombre, apellido } = req.body
+      const order = req.body;
+      const productos = req.body.productos;
 
-      const clients = await ClientApi.getAll();
-      const client = clients.filter(client => client.dni == dni);
-
-      let clientSaved = ''
-
-      if (client.length == 0) {
-        try {
-          clientSaved = await ClientApi.save({
-            nombre,
-            apellido,
-            dni,
-            email,
-          });
-        } catch (error) {
-          return res.status(500)
-          .send({ status: "error", error: ERROR.MESSAGE.INTERNAL_ERROR });
-        }
-      }
-
-      const orderSaved = await OrderApi.save(req.body);
-
-      let message = '';
-
+      order.estado = 'Pendiente';
+      order.productos = JSON.stringify(req.body.productos);
+      const orderSaved = await OrderApi.save(order);
       await Promise.all(
         productos.map(async (product) => {
           await ProductController.recalculateStock(product)
-          return message += `<div>
-            <ul>
-              <li>
-                <h3>${product.nombre} - Cantidad: ${product.cantidad} - Precio: $${product.precio}</h3>
-              </li>
-            </ul>
-          </div>`
         })
       )
-
-      message += `<h3>TOTAL: $${montoTotal}</h3>
-      <p>Puede pasar por nuestro local en Deán Funes 41 para abonar el producto y retirarlo. Te esperamos!</p>`
-
-      await mailer.sendMail({
-          from: 'p11@gmail.com',
-          to: email,
-          subject: 'Recibo de pedido',
-          html: `<div>
-              <h1>Gracias por confiar en nosotros!</h1>
-              <p>Pedido generado con el numero de orden: ${orderSaved._id}</p>
-              <p>Tu contraseña de acceso para ver tus pedidos es: ${client.length != 0 ? client[0].id : clientSaved.id}</p>
-              <p>Productos solicitados:</p>
-              ${message}
-          </div>`
-      });
-
       res.send(orderSaved);
     } catch (error) {
-      console.log(error)
       res
         .status(500)
         .send({ status: "error", error: ERROR.MESSAGE.INTERNAL_ERROR });
@@ -114,67 +70,32 @@ class OrderController {
   static async updateOrder(req, res) {
     try {
       const { id } = req.params;
-      const orderSaved = await OrderApi.updateById(id, req.body);
-      if (!orderSaved || orderSaved.kind)
+      const orderSaved = await OrderApi.update(id, req.body);
+      
+      let order = await OrderApi.getById(id);
+      
+      if (!order || orderSaved.kind)
         return res
           .status(404)
           .send({ status: "error", error: ERROR.MESSAGE.NO_ORDER });
-      if (req.body.estado == '64975148588fe6631b228e20') { //Si el estado es "Anulado" se resta el stock comprometido
+
+      order.productos = JSON.parse(order.productos);
+
+      if (req.body.estado == 'Rechazado') { //Si el estado es "Anulado" se resta el stock comprometido
         await Promise.all(
-          orderSaved.productos.map(async (product) => {
+          order.productos.map(async (product) => {
             ProductController.anulateStockCompromise(product)
           })
         )
       }
-      if (req.body.estado == '64975094588fe6631b228e14') { //Si el estado es "Retirado por el cliente" se resta el stock comprometido
-        await Promise.all(                                 //y se resta el stock disponible
-        orderSaved.productos.map(async (product) => {
+      if (req.body.estado == 'Confirmado') { //Si el estado es "Confirmado" se resta el stock comprometido y se resta el stock disponible
+        await Promise.all(                                 
+          order.productos.map(async (product) => {
           ProductController.confirmStockDeliver(product)
         })
         )
       }
-      res.send(orderSaved);
-    } catch (error) {
-      res
-        .status(500)
-        .send({ status: "error", error: ERROR.MESSAGE.INTERNAL_ERROR });
-    }
-  }
-
-  static async getQuantitySales(req, res) {
-    try {
-      const pipeline = [
-        {
-          $unwind: "$productos"
-        },
-        {
-          $group: {
-            _id: { $month: "$createdAt" },
-            totalVendido: { $sum: "$productos.cantidad" }
-          }
-        },
-      ]
-      const quantitySales = await OrderModel.aggregate(pipeline);
-      res.send({ quantitySales });
-    } catch (error) {
-      res
-        .status(500)
-        .send({ status: "error", error: ERROR.MESSAGE.INTERNAL_ERROR });
-    }
-  }
-
-  static async getTotalSales(req, res) {
-    try {
-      const pipeline = [
-        {
-          $group: {
-            _id: { $month: "$createdAt" },
-            montoVendido: { $sum: "$montoTotal" }
-          }
-        },
-      ]
-      const amountSales = await OrderModel.aggregate(pipeline);
-      res.send({ amountSales });
+      res.send(order);
     } catch (error) {
       res
         .status(500)

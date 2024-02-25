@@ -15,8 +15,8 @@ const createTableProducts = async (knexConfig) => {
             table.string('codigo')
             table.string('foto')
             table.integer('precio').notNullable()
-            table.integer('stock')
-            table.integer('stockComprometido')
+            table.integer('stock').notNullable()
+            table.integer('stockComprometido').notNullable()
             table.integer('categoria').references('id').inTable('categorias')
             table.string('created_at')
         })
@@ -48,16 +48,16 @@ const createTableUsers = async (knexConfig) => {
         await knexConfig.schema.createTable('usuarios', table => {
             table.increments('id').primary()
             table.string('nombre').notNullable()
-            table.string('apellido')
-            table.string('email')
-            table.string('password')
+            table.string('apellido').notNullable()
+            table.string('email').notNullable()
+            table.string('password').notNullable()
             table.date('fechaNacimiento').notNullable()
             table.string('direccion')
             table.string('telefono')
-            table.string('usuario')
-            table.string('dni')
+            table.string('usuario').notNullable()
+            table.string('dni').notNullable()
             table.string('genero')
-            table.boolean('activo')
+            table.boolean('activo').notNullable()
             table.string('created_at')
         })
         console.log('Tabla usuarios creada')
@@ -82,8 +82,29 @@ const createTableUsers = async (knexConfig) => {
     }
 }
 
+const createTableOrders = async (knexConfig) => {
+    try {
+        await knexConfig.schema.dropTableIfExists('ordenes')
+
+        await knexConfig.schema.createTable('ordenes', table => {
+            table.increments('id').primary()
+            table.string('nombre').notNullable()
+            table.string('apellido').notNullable()
+            table.integer('dni').notNullable()
+            table.json('productos');
+            table.integer('montoTotal').notNullable()
+            table.string('estado').notNullable()
+            table.timestamp('created_at')
+        })
+        console.log('Tabla Ordenes creada')
+    } catch (error) {
+        return error
+    }
+}
+
 export const initialSetup = async () => {
     await createTableProducts(knex_sqLite)
     await createTableCategories(knex_sqLite)
     await createTableUsers(knex_sqLite)
+    await createTableOrders(knex_sqLite)
 }

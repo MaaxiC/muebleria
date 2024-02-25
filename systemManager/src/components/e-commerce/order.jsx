@@ -36,8 +36,11 @@ export function Order() {
               <th>Nombre</th>
               <th>Apellido</th>
               <th>Dni</th>
+              <th>Fecha</th>
+              <td>Productos</td>
               <th>Monto Total</th>
               <th>Estado</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -47,26 +50,33 @@ export function Order() {
                 <td>{orden.nombre}</td>
                 <td>{orden.apellido}</td>
                 <td>{orden.dni}</td>
+                <td>{orden.created_at}</td>
+                <td>{orden.productos}</td>
                 <td>{orden.montoTotal}</td>
                 <td>{orden.estado}</td>
                 <td>
                   <Button
-                    className="btn btn-success"
+                    className={
+                      orden.estado === "Pendiente" ? 'btn btn-success mx-2' : 'btn btn-success mx-2 disabled'
+                    }
                     onClick={() => changeOrder(orden.id, "Confirmado")}
                   >
                     Confirmar Orden
                   </Button>
                   <Button
-                    className="btn btn-danger"
+                    className={
+                      orden.estado === "Pendiente" ? 'btn btn-danger mx-2' : 'btn btn-danger mx-2 disabled'
+                    }
                     onClick={() => changeOrder(orden.id, "Rechazado")}
                   >
                     Rechazar Orden
                   </Button>
                   <Button
-                    className="btn btn-primary"
+                    className="btn btn-primary mx-2"
                     onClick={() => {
                       setModalEditShow(true);
                       setOrder(orden);
+                      console.log(orden);
                     }}
                   >
                     Editar Orden
