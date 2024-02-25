@@ -13,7 +13,6 @@ import CartPage from './pages/CartPage';
 import NotFoundPage from './pages/NotFoundPage';
 import CategoriesPage from './pages/CategoriesPage';
 import ItemDetailPage from './pages/ItemDetailPage';
-import HistoryPage from './pages/HystoryPage';
 
 
 const App = () => {
@@ -29,7 +28,6 @@ const App = () => {
             <Route path='/aboutus' element={ <AboutUsPage/> } />
             <Route path='/contact' element={ <ContactPage/> } />
             <Route path='/faq' element={ <FAQPage/> } />
-            <Route path='/history' element={ <HistoryPage/> } />
             <Route path='/cart' element={ <CartPage/> } />
             <Route path='*' element={ <NotFoundPage/> } />
           </Routes>

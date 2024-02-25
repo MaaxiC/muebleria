@@ -3,7 +3,6 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { LinkContainer } from "react-router-bootstrap";
 import "./styles.css";
 import { Link } from "react-router-dom";
@@ -43,20 +42,9 @@ export function NavBar() {
             <LinkContainer to="/e-commerce/dashboard">
               <Nav.Link>Inicio</Nav.Link>
             </LinkContainer>
-
             <Nav.Link href="/e-commerce/consultProduct">Productos</Nav.Link>
-
-            <NavDropdown title="Marcas y Categorías" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/e-commerce/brands">
-                Ver Marcas
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/e-commerce/categories">
-                Ver Categorias
-              </NavDropdown.Item>
-            </NavDropdown>
-
+            <Nav.Link href="/e-commerce/categories">Categorías</Nav.Link>
             <Nav.Link href="/e-commerce/order">Órdenes</Nav.Link>
-            <Nav.Link href="/e-commerce/transaction">Transacciones</Nav.Link>
             <Nav.Link href="/Others/chartTest">Métricas</Nav.Link>
             <Nav.Link href="/e-commerce/about">Acerca de...</Nav.Link>
             <Nav.Link className="text-warning" onClick={logout}>

@@ -11,9 +11,7 @@ import { UserTable } from "./components/Users/userList";
 import { ConsultProduct } from "./components/e-commerce/consultProduct";
 import { Dashboard } from "./components/e-commerce/dashboard";
 import { Order } from "./components/e-commerce/order";
-import { Brand } from "./components/e-commerce/brands";
 import { Category } from "./components/e-commerce/categories";
-import { Transaction } from "./components/e-commerce/transaction";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ProtectedRoute } from "./components/protectedRoutes/protectedRoutes";
 import { AboutUs } from "./components/e-commerce/about";
@@ -79,29 +77,11 @@ root.render(
                 }
               ></Route>
               <Route
-                path="/e-commerce/brands"
-                element={
-                  <>
-                    <NavBar />
-                    <Brand />
-                  </>
-                }
-              ></Route>
-              <Route
                 path="/e-commerce/categories"
                 element={
                   <>
                     <NavBar />
                     <Category />
-                  </>
-                }
-              ></Route>
-              <Route
-                path="/e-commerce/transaction"
-                element={
-                  <>
-                    <NavBar />
-                    <Transaction />
                   </>
                 }
               ></Route>

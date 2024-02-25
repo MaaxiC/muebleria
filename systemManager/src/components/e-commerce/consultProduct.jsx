@@ -1,6 +1,5 @@
 import {
   fetchProducts,
-  fetchBrands,
   fetchCategories,
   deleteProduct,
 } from "../../services/products";
@@ -17,21 +16,12 @@ export function ConsultProduct() {
     staleTime: 6000,
   });
 
-  const brandsData = useQuery(["brands"], fetchBrands, {
-    staleTime: 6000,
-  });
-
   const Categorias = categoriesData.data;
-  const Marcas = brandsData.data;
 
   const findCategory = (id) => {
     return (
       Categorias?.find((item) => item.id === id)?.nombre || "Sin categoria"
     );
-  };
-
-  const findBrand = (id) => {
-    return Marcas?.find((item) => item.id === id)?.nombre || "Sin marca";
   };
 
   const [modalCreateShow, setModalCreateShow] = React.useState(false);
@@ -44,7 +34,6 @@ export function ConsultProduct() {
   const [codigoProducto, setCodigoProducto] = React.useState('');
   const [fotoProducto, setFotoProducto] = React.useState('');
   const [precioProducto, setPrecioProducto] = React.useState('');
-  const [marcaProducto, setMarcaProducto] = React.useState('');
   const [categoriaProducto, setCategoriaProducto] = React.useState('');
 
   const { data, isLoading, refetch } = useQuery(["products"], fetchProducts, {
@@ -83,7 +72,6 @@ export function ConsultProduct() {
               <th>Precio</th>
               <th>Stock</th>
               <th>Stock Comprometido</th>
-              <th>Marca</th>
               <th>Categoria</th>
               <th>Acciones</th>
             </tr>
@@ -98,7 +86,6 @@ export function ConsultProduct() {
                 <td>{producto.precio}</td>
                 <td>{producto.stock}</td>
                 <td>{producto.stockComprometido}</td>
-                <td>{findBrand(producto.marca)}</td>
                 <td>{findCategory(producto.categoria)}</td>
                 <td>
                   <Container className="d-md-flex justify-content-center">
@@ -113,7 +100,6 @@ export function ConsultProduct() {
                         setCodigoProducto(producto.codigo);
                         setFotoProducto(producto.foto);
                         setPrecioProducto(producto.precio);
-                        setMarcaProducto(producto.marca);
                         setCategoriaProducto(producto.categoria);
                       }}
                     >
@@ -164,7 +150,6 @@ export function ConsultProduct() {
         codigoProd={codigoProducto}
         fotoProd={fotoProducto}
         precioProd={precioProducto}
-        marcaProd={marcaProducto}
         categoriaProd={categoriaProducto}                
       />
     </>

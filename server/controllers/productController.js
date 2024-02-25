@@ -70,6 +70,7 @@ class ProductController {
         precio,
         categoria
       });
+      
       const productSaved = await ProductApi.update(id, product);
       if (!productSaved || productSaved.kind)
         return res

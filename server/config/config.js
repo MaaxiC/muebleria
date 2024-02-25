@@ -12,29 +12,24 @@ const config = {
     users: "usuarios",
     roles: "roles",
     categories: "categorias",
-  },
-  mongo_db: {
-    URL: process.env.URL ?? "mongodb://localhost/p11",
-    SECRET: process.env.SECRET ?? "secretKeySessionDefault"
+    orders: "ordenes",
   },
   SQL_DB: {
     client: 'sqlite3',
         connection: {
           filename: path.join(path.join(__dirname, "db"), "muebleria.sqlite"),
-    },
+        },
     useNullAsDefault: true,
-  },
-  mailing: {
-    EMAIL: process.env.EMAIL ?? "test@test.com",
-    EMAIL_PASS: process.env.EMAIL_PASS ?? "test",
   },
   server: {
     PORT: process.env.PORT ?? PORT,
+    SECRET: process.env.SECRET ?? "secretKeySessionDefault",
     routes: {
       auth: "/auth/api",
       products: "/api/productos",
       categories: "/api/categorias",
       users: "/api/usuarios",
+      orders: "/api/ordenes",
     },
   },
 };

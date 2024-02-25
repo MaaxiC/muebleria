@@ -4,7 +4,6 @@ import { Form } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import {
   updateProduct,
-  fetchBrands,
   fetchCategories,
 } from "../../services/products";
 import { useQuery } from "@tanstack/react-query";
@@ -16,7 +15,6 @@ export function EditProductModal(props) {
   const [photo, setPhoto] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
-  const [brand, setBrand] = useState("");
 
   const { data: categoriesData, isLoading: categoriesLoading } = useQuery(
     ["categories"],
@@ -27,15 +25,7 @@ export function EditProductModal(props) {
   );
   const Categorias = categoriesData;
 
-  const { data: brandsData, isLoading: brandsLoading } = useQuery(
-    ["brands"],
-    fetchBrands,
-    { staleTime: 6000 }
-  );
-
-  const marcas = brandsData;
-
-  const {tituloProd, descripcionProd, codigoProd, fotoProd, precioProd, categoriaProd, marcaProd, productId, ...others } = props;
+  const {tituloProd, descripcionProd, codigoProd, fotoProd, precioProd, categoriaProd, productId, ...others } = props;
 
   useEffect(() => {
     setProduct(tituloProd);
@@ -44,8 +34,7 @@ export function EditProductModal(props) {
     setPhoto(fotoProd);
     setPrice(precioProd);
     setCategory(categoriaProd);
-    setBrand(marcaProd);
-  }, [tituloProd, descripcionProd, codigoProd, fotoProd, precioProd, categoriaProd, marcaProd]);
+  }, [tituloProd, descripcionProd, codigoProd, fotoProd, precioProd, categoriaProd]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -55,7 +44,6 @@ export function EditProductModal(props) {
       code === "" ||
       photo === "" ||
       price === "" ||
-      brand === "" ||
       category === ""
     ) {
       alert("Todos los campos deben estar completos");
@@ -69,7 +57,6 @@ export function EditProductModal(props) {
           foto: photo,
           precio: price,
           categoria: category,
-          marca: brand,
         });
         others.onHide();
         window.location.replace("/e-commerce/consultProduct");
@@ -79,7 +66,7 @@ export function EditProductModal(props) {
     }
   };
 
-  if (categoriesLoading || brandsLoading) return "Loading...";
+  if (categoriesLoading) return "Loading...";
 
   return (
     <>
@@ -146,23 +133,6 @@ export function EditProductModal(props) {
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
               />
-            </Form.Group>
-
-            <Form.Group className="mb-1" controlId="formBasicNumber">
-              <Form.Label>Marca</Form.Label>
-              <Form.Select
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
-              >
-                <option disabled value="">
-                  Elegir marca
-                </option>
-                {marcas.map((marca) => (
-                  <option name="marca" value={marca.id} key={marca.id}>
-                    {marca.nombre}
-                  </option>
-                ))}
-              </Form.Select>
             </Form.Group>
 
             <Form.Group className="mb-1" controlId="formBasicNumber">

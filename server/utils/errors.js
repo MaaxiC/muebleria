@@ -6,6 +6,7 @@ const UNAUTHORIZED = "contraseña incorrecta";
 const NO_STOCK = "stock insuficiente";
 const NO_STOCK_COMPROMISE = "stock comprometido insuficiente";
 const INVALID_ACTIVE = "estado invalido";
+const NO_ORDER = "orden no encontrada";
 
 export const ERROR = {
   MESSAGE: {
@@ -17,5 +18,6 @@ export const ERROR = {
     NO_STOCK,
     NO_STOCK_COMPROMISE,
     INVALID_ACTIVE,
+    NO_ORDER,
   },
 };

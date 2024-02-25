@@ -6,7 +6,7 @@ import CartWidget from "../CartWidget/CartWidget";
 import { Link, NavLink } from 'react-router-dom';
 import { fetchCategories, fetchProducts } from "../../../services/Products";
 import { useQuery } from "@tanstack/react-query";
-import SearchWidget from "../SearchWidget/SearchWidget";
+//import SearchWidget from "../SearchWidget/SearchWidget";
 
 const NavBar = () => {
   const { data } = useQuery(
@@ -40,7 +40,6 @@ const NavBar = () => {
             <NavLink to={'/contact'} className="nav-link text-center">Contacto</NavLink>
             <NavLink to={'/faq'} className="nav-link text-center">FAQ</NavLink>
             <NavLink to={'/aboutus'} className="nav-link text-center">Sobre Nosotros</NavLink>
-            <NavLink to={'/history'} className="nav-link text-center">Mis Pedidos</NavLink>
           </Nav>
           {/* <SearchWidget placeholder="Buscar Producto" data={products}/> */}
           <div className="d-grid p-2">
