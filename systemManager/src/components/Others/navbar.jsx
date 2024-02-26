@@ -17,21 +17,20 @@ export function NavBar() {
     <Navbar
       expand="lg"
       sticky="top"
-      variant="dark"
-      className="md-6 gradient-custom text-body-primary"
+      className="md-6 gradient-custom"
     >
       <Container fluid>
         <Link to={"/"} />
         <Navbar.Brand href="/e-commerce/dashboard">
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgsgT3ZuoK5tyrXU4f4F6-rWntY3ouZ-cjkS7B2ELHpwNQ0t671vKjTHJ7Yu62AsixFdg&usqp=CAU"
-            width="30"
-            height="30"
+            src="../images/avataradmin.png"
+            width="50"
+            height="50"
             className="d-inline-block align-center"
             alt="P11 Tecnología"
           />
         </Navbar.Brand>
-        <Navbar.Brand href="/e-commerce/dashboard">P11 TECNOLOGÍA</Navbar.Brand>
+        <Navbar.Brand href="/e-commerce/dashboard">Panel de control</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -43,23 +42,11 @@ export function NavBar() {
             <LinkContainer to="/e-commerce/dashboard">
               <Nav.Link>Inicio</Nav.Link>
             </LinkContainer>
-
             <Nav.Link href="/e-commerce/consultProduct">Productos</Nav.Link>
-
-            <NavDropdown title="Marcas y Categorías" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/e-commerce/brands">
-                Ver Marcas
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/e-commerce/categories">
-                Ver Categorias
-              </NavDropdown.Item>
-            </NavDropdown>
-
-            <Nav.Link href="/e-commerce/order">Órdenes</Nav.Link>
-            <Nav.Link href="/e-commerce/transaction">Transacciones</Nav.Link>
-            <Nav.Link href="/Others/chartTest">Métricas</Nav.Link>
+            <Nav.Link href="/e-commerce/categories" id="basic-nav-dropdown">Categorías</Nav.Link>
+            <Nav.Link href="/e-commerce/order">Ventas</Nav.Link>
             <Nav.Link href="/e-commerce/about">Acerca de...</Nav.Link>
-            <Nav.Link className="text-warning" onClick={logout}>
+            <Nav.Link className="text-primary" onClick={logout}>
               Cerrar sesión
             </Nav.Link>
           </Nav>

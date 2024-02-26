@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Form, Table } from "react-bootstrap";
 import { Container, Button } from "react-bootstrap";
 import { useState } from "react";
+import Footer from "../Others/footer";
 
 export function Order() {
   const { data } = useQuery(["orders"], fetchOrders, {
@@ -40,7 +41,7 @@ export function Order() {
           await updateOrder(element.id, { estado: element.value });
         });
         alert("Ordenes actualizadas correctamente");
-        setArrayEstado(undefined)
+        setArrayEstado(undefined);
       } catch (error) {
         alert(error.response.data.error);
       }
@@ -82,7 +83,10 @@ export function Order() {
                     onChange={handleChange}
                   >
                     {Estados.map((estado, idx) => {
-                      if (orden.estado === '64975148588fe6631b228e20' || orden.estado === '64975094588fe6631b228e14') {
+                      if (
+                        orden.estado === "64975148588fe6631b228e20" ||
+                        orden.estado === "64975094588fe6631b228e14"
+                      ) {
                         return (
                           <option id={idx} key={idx} value={estado.id} disabled>
                             {estado.nombre}
@@ -122,6 +126,9 @@ export function Order() {
       </Container>
     </>
   ) : (
-    <>Cargando...</>
+    <>
+      Cargando...
+      <Footer />
+    </>
   );
 }

@@ -23,14 +23,14 @@ export function Login() {
   return (
     <>
       <Form
-        className="card container h-100 col-md-3 mt-5 bg-dark text-light"
+        className="bg-dark card container h-100 col-md-3 mt-5 text-light"
         onSubmit={handleSubmit}
       >
         <div className="row mt-2">
           <img
-            src="images/p11banner.jpg"
+            src="images/nacarbanner.png"
             width="750"
-            height="188"
+            height="150"
             className="d-inline-block align-center"
             alt="P11 Tecnología Banner"
             title="P11 Tecnología"
@@ -58,7 +58,7 @@ export function Login() {
           />
         </Form.Group>
         <br />
-        <Button variant="primary" type="submit">
+        <Button variant="success" type="submit">
           Acceder
         </Button>
         {errorMessage && (

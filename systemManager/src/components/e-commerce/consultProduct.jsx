@@ -11,6 +11,7 @@ import { Button } from "react-bootstrap";
 import { ProductModal } from "../modals/productModal";
 import { StockModal } from "../modals/adjustStockModal";
 import { EditProductModal } from "../modals/editProductModal";
+import Footer from "../Others/footer";
 
 export function ConsultProduct() {
   const categoriesData = useQuery(["categories"], fetchCategories, {
@@ -167,6 +168,7 @@ export function ConsultProduct() {
         marcaProd={marcaProducto}
         categoriaProd={categoriaProducto}                
       />
+      <Footer/>
     </>
   );
 }

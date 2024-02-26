@@ -8,8 +8,8 @@ const CartWidget = () => {
 
   return (
     <Link to={"/cart"}>
-      <Button variant="dark" style={{ position: "relative" }}>
-        <MdOutlineShoppingCart size={20} />
+      <Button className="navbar-text navbar-bg position-relative"  >
+        <MdOutlineShoppingCart size={30} />
         {cartQuantity > 0 ? (
           <div
             className="rounded-circle bg-danger d-flex justify-content-center align-items-center"

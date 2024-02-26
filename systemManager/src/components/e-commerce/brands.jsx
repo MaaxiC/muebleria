@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Container, Table } from "react-bootstrap";
 import { BrandModal } from "../modals/brandModal";
 import { Button } from "react-bootstrap";
+import Footer from "../Others/footer";
 import React from "react";
 
 export function Brand() {
@@ -62,6 +63,7 @@ export function Brand() {
         </Table>
       </Container>
       <BrandModal show={modalShow} onHide={() => setModalShow(false)} />
+      <Footer></Footer>
     </>
   );
 }
