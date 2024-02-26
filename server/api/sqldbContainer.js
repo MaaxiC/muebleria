@@ -21,7 +21,7 @@ class SqldbContainer {
             if (row == 0) {
                 return undefined 
             }
-            return row
+            return row[0]
          } catch (error) {
             return error
          }

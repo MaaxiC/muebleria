@@ -26,6 +26,10 @@ const Vcards = [
     title: "Parámetros",
     image: "../images/parametros.png",
     link: "#",
+    title: "Ordenes",
+    image:
+      "https://cdn.pixabay.com/photo/2017/07/18/23/23/user-2517433_1280.png",
+    link: "/e-commerce/order",
   },
   {
     id: 5,
@@ -40,13 +44,13 @@ const Vcards = [
     // link: "redirecciona a pagina web",
   },
   {
-    id: 7,
+    id: 5,
     title: "Acerca de...",
     image: "../images/acercade.png",
     link: "/e-commerce/about",
   },
   {
-    id: 8,
+    id: 6,
     title: "Cerrar sesión",
     image: "../images/cerrarsesion.png",
     link: "/",

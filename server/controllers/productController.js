@@ -19,7 +19,6 @@ class ProductController {
     try {
       const productID = req.params.id;
       const product = await ProductApi.getById(productID);
-      console.log(product)
       if (!product || product.kind)
         return res
           .status(404)
@@ -44,6 +43,7 @@ class ProductController {
         stock,
         categoria
       });
+      product.stockComprometido = 0
       const productSaved = await ProductApi.save(product);
       res.send(productSaved);
     } catch (error) {
@@ -70,6 +70,7 @@ class ProductController {
         precio,
         categoria
       });
+      
       const productSaved = await ProductApi.update(id, product);
       if (!productSaved || productSaved.kind)
         return res
@@ -120,7 +121,7 @@ class ProductController {
           return res
             .status(400)
             .send({ status: "error", error: ERROR.MESSAGE.NO_STOCK_COMPROMISE });
-      const productSaved = await ProductApi.updateById(id, product);
+      const productSaved = await ProductApi.update(id, product);
       if (!productSaved || productSaved.kind)
         return res
           .status(404)
@@ -135,9 +136,11 @@ class ProductController {
 
   static async recalculateStock({id, cantidad}) {
     try {
+      console.log('recalculateStock')
       const product = await ProductApi.getById(id)
       product.stockComprometido += cantidad
-      await ProductApi.updateById(id, product);
+      const response = await ProductApi.update(id, product);
+      console.log(response)
     } catch (error) {
       return error
     }
@@ -147,7 +150,7 @@ class ProductController {
     try {
       const product = await ProductApi.getById(id)
       product.stockComprometido -= cantidad
-      ProductApi.updateById(product.id, product);
+      ProductApi.update(product.id, product);
     } catch (error) {
       return error
     }
@@ -158,7 +161,7 @@ class ProductController {
       const product = await ProductApi.getById(id)
       product.stockComprometido -= cantidad
       product.stock -= cantidad
-      ProductApi.updateById(product.id, product);
+      ProductApi.update(product.id, product);
     } catch (error) {
       return error
     }

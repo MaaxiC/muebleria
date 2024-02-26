@@ -5,6 +5,7 @@ import {
   categoryRouter,
   authRouter,
   userRouter,
+  orderRouter,
 } from "./routes/index.js";
 import { config } from "./config/config.js";
 import cors from "cors";
@@ -44,7 +45,7 @@ app.use(
       createtable: true,
       clearInterval: 28800,
     }),
-    secret: config.mongo_db.SECRET,
+    secret: config.server.SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {secure: false, httpOnly: true }
@@ -61,6 +62,7 @@ app.use(config.server.routes.products, productRouter);
 app.use(config.server.routes.categories, categoryRouter);
 app.use(config.server.routes.auth, authRouter);
 app.use(config.server.routes.users, userRouter);
+app.use(config.server.routes.orders, orderRouter);
 
 app.use((req, res) => {
   res.status(404).send({ status: "error", error: "Invalid Request" });

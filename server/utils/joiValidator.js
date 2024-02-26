@@ -7,7 +7,7 @@ const product = joi.object({
   foto: joi.string().required(),
   precio: joi.number().min(100).required(),
   stock: joi.number().integer(),
-  categoria: joi.string().min(2).max(100).required(),
+  categoria: joi.number().integer(),
 });
 
 const user = joi.object({

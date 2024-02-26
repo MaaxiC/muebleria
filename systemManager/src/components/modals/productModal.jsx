@@ -4,7 +4,6 @@ import { Form } from "react-bootstrap";
 import { useState } from "react";
 import {
   addProduct,
-  fetchBrands,
   fetchCategories,
 } from "../../services/products";
 import { useQuery } from "@tanstack/react-query";
@@ -17,7 +16,6 @@ export function ProductModal(props) {
   const [price, setPrice] = useState("");
   const [InitialStock, setStock] = useState("");
   const [category, setCategory] = useState("");
-  const [brand, setBrand] = useState("");
 
   const { data: categoriesData, isLoading: categoriesLoading } = useQuery(
     ["categories"],
@@ -28,14 +26,6 @@ export function ProductModal(props) {
   );
   const Categorias = categoriesData;
 
-  const { data: brandsData, isLoading: brandsLoading } = useQuery(
-    ["brands"],
-    fetchBrands,
-    { staleTime: 6000 }
-  );
-
-  const marcas = brandsData;
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (
@@ -45,8 +35,7 @@ export function ProductModal(props) {
       photo === "" ||
       price === "" ||
       InitialStock === "" ||
-      category === "" ||
-      brand === ""
+      category === ""
     ) {
       alert("Todos los campos deben estar completos");
       return;
@@ -60,7 +49,6 @@ export function ProductModal(props) {
           precio: price,
           stock: InitialStock,
           categoria: category,
-          marca: brand,
         });
         props.onHide();
         window.location.replace("/e-commerce/consultProduct");
@@ -70,7 +58,7 @@ export function ProductModal(props) {
     }
   };
 
-  if (categoriesLoading || brandsLoading) return "Loading...";
+  if (categoriesLoading) return "Loading...";
 
   return (
     <>
@@ -148,23 +136,6 @@ export function ProductModal(props) {
                 value={InitialStock}
                 onChange={(e) => setStock(e.target.value)}
               />
-            </Form.Group>
-
-            <Form.Group className="mb-1" controlId="formBasicNumber">
-              <Form.Label>Marca</Form.Label>
-              <Form.Select
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
-              >
-                <option disabled value="">
-                  Elegir marca
-                </option>
-                {marcas.map((marca) => (
-                  <option name="marca" value={marca.id} key={marca.id}>
-                    {marca.nombre}
-                  </option>
-                ))}
-              </Form.Select>
             </Form.Group>
 
             <Form.Group className="mb-1" controlId="formBasicNumber">

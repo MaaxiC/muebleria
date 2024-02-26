@@ -45,7 +45,7 @@ class CategoryController {
   static async updateCategory(req, res) {
     try {
       const { id } = req.params;
-      const categorySaved = await CategoryApi.updateById(id, req.body);
+      const categorySaved = await CategoryApi.update(id, req.body);
       if (!categorySaved || categorySaved.kind)
         return res
           .status(404)

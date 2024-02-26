@@ -11,16 +11,8 @@ function HomePage(){
       </Row>
       <h1 className='text-center my-4'>Novedades</h1>
       <ItemList/>
-      <br />
-      <br />
-      <div>
-        <h4>HOLA</h4>
-      <img
-            className="d-block w-100 img-fluid"
-            src="/src/images/mediosdepago.png"
-            alt="Primera Imagen"
-          />
-      </div>
+      <h1 className='text-center my-4 d-none d-lg-block'>Nuestras Marcas</h1>
+      <CarouselBrands/>
     </Container>
   )
 }
