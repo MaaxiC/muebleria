@@ -46,7 +46,7 @@ const changeActiveUser = async (req, res) => {
         .send({ status: "error", error: ERROR.MESSAGE.NO_USER });
     res.send({
       status: "success",
-      response: "estado actualizado correctamente",
+      response: "Estado actualizado correctamente",
     });
   } catch (error) {
     res
@@ -74,7 +74,7 @@ const updateUser = async (req, res) => {
         .send({ status: "error", error: ERROR.MESSAGE.NO_USER });
     res.send({
       status: "success",
-      response: "usuario actualizado correctamente",
+      response: "Usuario actualizado correctamente",
     });
   } catch (error) {
     if (error._original)

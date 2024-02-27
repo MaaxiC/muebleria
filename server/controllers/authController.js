@@ -9,7 +9,7 @@ const registerFail = async (req, res) => {
     .status(401)
     .send({
       status: "error",
-      error: "el usuario o el mail ya se encuentra registrado",
+      error: "El usuario o el mail ya se encuentra registrado",
     });
 };
 
@@ -45,7 +45,7 @@ const signIn = async (req, res) => {
 };
 
 const loginFail = async (req, res) => {
-  res.status(500).send({ status: "error", error: "fallo al iniciar sesion" });
+  res.status(500).send({ status: "error", error: "Fallo al iniciar sesion" });
 };
 
 export { signUp, signIn, registerFail, loginFail, validateSignIn };

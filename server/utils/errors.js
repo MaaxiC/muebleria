@@ -1,12 +1,12 @@
-const NO_PRODUCT = "producto no encontrado";
-const NO_USER = "usuario no encontrado";
-const INTERNAL_ERROR = "fallo en el servidor";
-const NO_CATEGORY = "categoria no encontrada";
-const UNAUTHORIZED = "contraseña incorrecta";
-const NO_STOCK = "stock insuficiente";
-const NO_STOCK_COMPROMISE = "stock comprometido insuficiente";
-const INVALID_ACTIVE = "estado invalido";
-const NO_ORDER = "orden no encontrada";
+const NO_PRODUCT = "Producto no encontrado";
+const NO_USER = "Usuario no encontrado";
+const INTERNAL_ERROR = "Fallo en el servidor";
+const NO_CATEGORY = "Categoria no encontrada";
+const UNAUTHORIZED = "Contraseña incorrecta";
+const NO_STOCK = "Stock insuficiente";
+const NO_STOCK_COMPROMISE = "Stock comprometido insuficiente";
+const INVALID_ACTIVE = "Estado invalido";
+const NO_ORDER = "Orden no encontrada";
 
 export const ERROR = {
   MESSAGE: {

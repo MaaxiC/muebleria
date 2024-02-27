@@ -41,11 +41,11 @@ const initializePassport = () => {
           const user = await UserDao.getByUser(usuario);
           if (!user) {
             return done(null, false, {
-              message: "no existe el usuario en la base de datos",
+              message: "No existe el usuario en la base de datos",
             });
           }
           if (!validatePassword(user[0], password)) {
-            return done(null, false, { message: "contraseña incorrecta" });
+            return done(null, false, { message: "Contraseña incorrecta" });
           }
           return done(null, user);
         } catch (error) {

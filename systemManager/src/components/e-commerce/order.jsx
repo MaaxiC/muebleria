@@ -58,7 +58,7 @@ export function Order() {
                     <li>{`${producto.nombre} x ${producto.cantidad} cant.`}</li>
                   </ul>
                 ))}</td>
-                <td>{orden.montoTotal}</td>
+                <td>${orden.montoTotal}</td>
                 <td>{orden.estado}</td>
                 <td>
                   <Button

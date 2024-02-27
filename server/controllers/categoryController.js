@@ -68,7 +68,7 @@ class CategoryController {
           .send({ status: "error", error: ERROR.MESSAGE.NO_CATEGORY });
       res.send({
         status: "success",
-        response: "categoria eliminada correctamente",
+        response: "Categoria eliminada correctamente",
       });
     } catch (error) {
       res

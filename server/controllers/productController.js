@@ -76,7 +76,7 @@ class ProductController {
         return res
           .status(404)
           .send({ status: "error", error: ERROR.MESSAGE.NO_PRODUCT });
-      res.send({ success: "actualizado correctamente" });
+      res.send({ success: "Actualizado correctamente" });
     } catch (error) {
       if (error._original)
         return res
@@ -99,7 +99,7 @@ class ProductController {
           .send({ status: "error", error: ERROR.MESSAGE.NO_PRODUCT });
       res.send({
         status: "success",
-        response: "producto eliminado correctamente",
+        response: "Producto eliminado correctamente",
       });
     } catch (error) {
       res
