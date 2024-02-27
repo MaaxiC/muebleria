@@ -1,9 +1,10 @@
 import './custom.css';
+import './index.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './components/Navigation/NavBar/NavBar';
 import Footer from './components/Footer/Footer';
 import { CartProvider } from './context/CartContext';
-
+import WhatsAppButton  from './components/WhatsAppButton/whatsappButton';
 //pages
 import HomePage from './pages/HomePage';
 import AboutUsPage from './pages/AboutPage';
@@ -14,13 +15,13 @@ import NotFoundPage from './pages/NotFoundPage';
 import CategoriesPage from './pages/CategoriesPage';
 import ItemDetailPage from './pages/ItemDetailPage';
 
-
 const App = () => {
   return (
     <div className='App'>
       <CartProvider>
         <BrowserRouter>
           <NavBar/>
+          <WhatsAppButton/>
           <Routes>
             <Route path='/' element={ <HomePage/> } />
             <Route path='/categories/:category' element={ <CategoriesPage/> } />

@@ -2,3 +2,31 @@ body {
   margin: 0;
   padding-bottom: 170px;
 }
+
+.navbar-bg {
+  background-color: #faf2cd;
+ }
+
+ .navbar-text{
+  color: black;
+ }
+ 
+ .body {
+   background-color: #ffffff;
+ }
+ 
+ .whatsapp-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.Carousel{
+  height: auto;
+
+} 
+
+ .footer {
+   background-color: #747458;
+ }

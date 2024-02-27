@@ -14,36 +14,36 @@ const Contact = () => {
         </Row>  
         <Row className="justify-content-center mt-2 text-center">
             <Col md="auto">
-                <h4>Lunes a viernes de 8 a 18hs</h4>
+                <h4>Lunes a sábados de 9 a 19hs</h4>
             </Col>
         </Row>              
       <Row>
         <Col>
             <CardGroup className="p-4 mt-3">
                 <Card className='align-items-center text-center border-0'>
-                    <Card.Img variant="top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/640px-WhatsApp.svg.png" style={{width: "50%", position: "center"}}/>
+                    <Card.Img variant="top" src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" style={{width: "50%", position: "center"}}/>
                     <Card.Body>
                     <Card.Title>WhatsApp</Card.Title>
                     <Card.Text>
-                        +54 0 351 1234567
+                    +54 9 351 661-3241
                     </Card.Text>
                     </Card.Body>
                 </Card>
                 <Card className='align-items-center text-center border-0'>
-                    <Card.Img variant="top" src="https://images.vexels.com/media/users/3/140965/isolated/preview/a945eef28564ae85fff5ac18adf637d9-icono-de-telefono-redondo.png" style={{width: "50%", position: "center"}}/>
+                    <Card.Img variant="top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png" style={{width: "50%", position: "center"}}/>
                     <Card.Body>
-                    <Card.Title>Telefono</Card.Title>
+                    <Card.Title>Instagram</Card.Title>
                     <Card.Text>
-                        +54 0 351 4271234
+                       @nacarentucasa 
                     </Card.Text>
                     </Card.Body>
                 </Card>
                 <Card className='align-items-center text-center p-2 border-0'>
-                    <Card.Img variant="top" src="https://icons.iconarchive.com/icons/hamzasaleem/stock/512/Mail-icon.png" style={{width: "50%", position: "center"}}/>
+                    <Card.Img variant="top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/2560px-Gmail_icon_%282020%29.svg.png" style={{width: "60%", position: "center"}}/>
                     <Card.Body>
                     <Card.Title>Mail</Card.Title>
                     <Card.Text>
-                        p11@gmail.com
+                    nacar6sep@gmail.com
                     </Card.Text>
                     </Card.Body>
                 </Card>

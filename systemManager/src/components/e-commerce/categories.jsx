@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Container, Table } from "react-bootstrap";
 import { CategoryModal } from "../modals/categoryModal";
 import { Button } from "react-bootstrap";
+import Footer from "../Others/footer";
 import React from "react";
 
 export function Category() {
@@ -50,10 +51,10 @@ export function Category() {
                   {/* <Button className="btn btn-primary">Editar</Button> */}
                   <Button
                     className="btn btn-danger"
-                    onClick={async() => {
-                      deleteCategory(categoria.id)
-                      await refetch()
-                      window.location.reload()
+                    onClick={async () => {
+                      deleteCategory(categoria.id);
+                      await refetch();
+                      window.location.reload();
                     }}
                     style={{ marginLeft: "10px" }}
                   >
@@ -66,6 +67,8 @@ export function Category() {
         </Table>
       </Container>
       <CategoryModal show={modalShow} onHide={() => setModalShow(false)} />
+      <br />
+      <Footer/>
     </>
   );
 }
