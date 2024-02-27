@@ -3,46 +3,14 @@ import { useQuery } from "@tanstack/react-query";
 import { Table } from "react-bootstrap";
 import { Container, Button } from "react-bootstrap";
 import { useState } from "react";
-import Footer from "../Others/footer";
+import { EditOrderModal } from "../modals/editOrderModal";
 
 export function Order() {
   const { data } = useQuery(["orders"], fetchOrders, {
     staleTime: 6000,
   });
   const Ordenes = data;
-  const stateData = useQuery(["states"], fetchStates, {
-    staleTime: 6000,
-  });
 
-  const [arrayEstado, setArrayEstado] = useState();
-
-  const Estados = stateData.data;
-
-  const handleChange = (event) => {
-    if (arrayEstado === undefined) {
-      setArrayEstado([{ id: event.target.id, value: event.target.value }]);
-    } else if (arrayEstado.find((element) => element.id === event.target.id)) {
-      arrayEstado.find((element) => element.id === event.target.id).value =
-        event.target.value;
-    } else {
-      setArrayEstado([
-        ...arrayEstado,
-        { id: event.target.id, value: event.target.value },
-      ]);
-    }
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (arrayEstado !== undefined) {
-      try {
-        arrayEstado.forEach(async (element) => {
-          await updateOrder(element.id, { estado: element.value });
-        });
-        alert("Ordenes actualizadas correctamente");
-        setArrayEstado(undefined);
-      } catch (error) {
-        alert(error.response.data.error);
   const changeOrder = async (id, estado) => {
     try {
       if (estado === "Confirmado") {
@@ -90,7 +58,7 @@ export function Order() {
                     <li>{`${producto.nombre} x ${producto.cantidad} cant.`}</li>
                   </ul>
                 ))}</td>
-                <td>{orden.montoTotal}</td>
+                <td>${orden.montoTotal}</td>
                 <td>{orden.estado}</td>
                 <td>
                   <Button
@@ -99,25 +67,6 @@ export function Order() {
                     }
                     onClick={() => changeOrder(orden.id, "Confirmado")}
                   >
-                    {Estados.map((estado, idx) => {
-                      if (
-                        orden.estado === "64975148588fe6631b228e20" ||
-                        orden.estado === "64975094588fe6631b228e14"
-                      ) {
-                        return (
-                          <option id={idx} key={idx} value={estado.id} disabled>
-                            {estado.nombre}
-                          </option>
-                        );
-                      } else {
-                        return (
-                          <option id={idx} key={idx} value={estado.id}>
-                            {estado.nombre}
-                          </option>
-                        );
-                      }
-                    })}
-                  </Form.Select>
                     Confirmar Orden
                   </Button>
                   <Button
@@ -149,10 +98,4 @@ export function Order() {
         order={order}               
       />
     </>
-: (
-    <>
-      Cargando...
-      <Footer />
-    </>
-  );
 }

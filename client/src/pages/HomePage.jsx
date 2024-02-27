@@ -12,7 +12,6 @@ function HomePage(){
       <h1 className='text-center my-4'>Novedades</h1>
       <ItemList/>
       <h1 className='text-center my-4 d-none d-lg-block'>Nuestras Marcas</h1>
-      <CarouselBrands/>
     </Container>
   )
 }

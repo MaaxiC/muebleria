@@ -26,10 +26,6 @@ const Vcards = [
     title: "Parámetros",
     image: "../images/parametros.png",
     link: "#",
-    title: "Ordenes",
-    image:
-      "https://cdn.pixabay.com/photo/2017/07/18/23/23/user-2517433_1280.png",
-    link: "/e-commerce/order",
   },
   {
     id: 5,
@@ -41,16 +37,16 @@ const Vcards = [
     id: 6,
     title: "Mi página",
     image: "../images/mipagina.png",
-    // link: "redirecciona a pagina web",
+    //redireccion a pagina cliente
   },
   {
-    id: 5,
+    id: 7,
     title: "Acerca de...",
     image: "../images/acercade.png",
     link: "/e-commerce/about",
   },
   {
-    id: 6,
+    id: 8,
     title: "Cerrar sesión",
     image: "../images/cerrarsesion.png",
     link: "/",
@@ -60,7 +56,7 @@ const Vcards = [
 export function Dashboard() {
   return (
     <>
-      <div className="container h-100 align-items-center mt-5">
+      <div className="container h-100 align-items-center mt-2">
         <h1 className="text-center my-4">¡Hola de nuevo!</h1>
         <div className="row ">
           {Vcards.map((card) => (
