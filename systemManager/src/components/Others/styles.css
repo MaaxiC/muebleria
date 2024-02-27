@@ -4,14 +4,22 @@
 }
 
 .gradient-custom {
-    background: rgb(82,88,89);
-    background: radial-gradient(circle, rgba(82,88,89,1) 0%, rgba(6,8,9,1) 100%);
+  background: rgb(252,238,202);
+  background: linear-gradient(159deg, rgba(252,238,202,1) 40%, rgba(94,77,18,1) 100%);
+  color:black;
   }
 
 
 .gradient-custom-card {
     background: rgb(55,70,213);
 background: linear-gradient(21deg, rgba(55,70,213,0.865983893557423) 18%, rgba(6,8,9,1) 100%);
-  }
+}
 
+.custom-bg {
+  background-color: #695D3B;
+}
+
+.footer {
+  background-color: #747458;
+}
  

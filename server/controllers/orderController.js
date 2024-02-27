@@ -50,7 +50,6 @@ class OrderController {
     try {
       const order = req.body;
       const productos = req.body.productos;
-
       order.estado = 'Pendiente';
       order.productos = JSON.stringify(req.body.productos);
       const orderSaved = await OrderApi.save(order);
