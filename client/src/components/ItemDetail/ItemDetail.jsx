@@ -61,7 +61,7 @@ const ItemDetail = () => {
   }
 
   return (
-    <Container>
+    <Container className="custom-margin-top">
         <Card
             className="m-5 text-center h-100"
             style={{

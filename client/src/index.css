@@ -17,16 +17,24 @@ body {
  
  .whatsapp-button {
   position: fixed;
-  bottom: 20px;
+  bottom: 120px;
   right: 20px;
   z-index: 1000;
 }
 
 .Carousel{
   height: auto;
-
+  margin-top: 105px;
 } 
+
+.custom-margin-top{
+  margin-top: 150px;
+}
 
  .footer {
    background-color: #747458;
+ }
+
+ .custom-font.size {
+  font-size: medium;
  }

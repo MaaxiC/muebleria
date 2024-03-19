@@ -4,6 +4,7 @@ import { Table } from "react-bootstrap";
 import { Container, Button } from "react-bootstrap";
 import { useState } from "react";
 import { EditOrderModal } from "../modals/editOrderModal";
+import Footer from "../Others/footer";
 
 export function Order() {
   const { data } = useQuery(["orders"], fetchOrders, {
@@ -30,9 +31,10 @@ export function Order() {
   const [modalEditShow, setModalEditShow] = useState(false);
   const [order, setOrder] = useState({});
 
-  return <>
+  return (
+    <>
       <Container className="align-center mt-4">
-        <Table striped bordered hover>
+        <Table striped bordered hover responsive>
           <thead>
             <tr>
               <th>#</th>
@@ -40,7 +42,7 @@ export function Order() {
               <th>Apellido</th>
               <th>Dni</th>
               <th>Fecha</th>
-              <td>Productos</td>
+              <th>Productos</th>
               <th>Monto Total</th>
               <th>Estado</th>
               <th>Acciones</th>
@@ -54,27 +56,35 @@ export function Order() {
                 <td>{orden.apellido}</td>
                 <td>{orden.dni}</td>
                 <td>{orden.created_at}</td>
-                <td>{JSON.parse(orden.productos).map(producto => (
-                  <ul key={producto.id}>
-                    <li>{`${producto.nombre} x ${producto.cantidad} cant.`}</li>
-                  </ul>
-                ))}</td>
+                <td>
+                  {JSON.parse(orden.productos).map((producto) => (
+                    <ul key={producto.id}>
+                      <li>{`${producto.nombre} x ${producto.cantidad} cant.`}</li>
+                    </ul>
+                  ))}
+                </td>
                 <td>${orden.montoTotal}</td>
                 <td>{orden.estado}</td>
                 <td>
                   <Button
                     className={
-                      orden.estado === "Pendiente" ? 'btn btn-success mx-2' : 'btn btn-success mx-2 disabled'
+                      orden.estado === "Pendiente"
+                        ? "btn btn-success mx-2"
+                        : "btn btn-success mx-2 disabled"
                     }
+                    style={{ margin: "5px" }}
                     onClick={() => changeOrder(orden.id, "Confirmado")}
                   >
                     Confirmar Orden
                   </Button>
                   <Button
                     className={
-                      orden.estado === "Pendiente" ? 'btn btn-danger mx-2' : 'btn btn-danger mx-2 disabled'
+                      orden.estado === "Pendiente"
+                        ? "btn btn-danger mx-2"
+                        : "btn btn-danger mx-2 disabled"
                     }
                     onClick={() => changeOrder(orden.id, "Rechazado")}
+                    style={{ margin: "5px" }}
                   >
                     Rechazar Orden
                   </Button>
@@ -84,6 +94,7 @@ export function Order() {
                       setModalEditShow(true);
                       setOrder(orden);
                     }}
+                    style={{ margin: "5px" }}
                   >
                     Editar Orden
                   </Button>
@@ -93,10 +104,12 @@ export function Order() {
           </tbody>
         </Table>
       </Container>
+      <Footer />
       <EditOrderModal
         show={modalEditShow}
         onHide={() => setModalEditShow(false)}
-        order={order}               
+        order={order}
       />
     </>
+  );
 }

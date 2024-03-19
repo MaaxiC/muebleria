@@ -3,6 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import { Form } from "react-bootstrap";
 import { useState } from "react";
 import { updateOrder } from "../../services/orders";
+import { ValidationAlert } from "./validationModals";
 
 export function EditOrderModal(props) {
   const [order, setOrder] = useState(props.order);
@@ -85,6 +86,7 @@ export function EditOrderModal(props) {
             <Button variant="success my-3" type="submit">
               Actualizar
             </Button>
+            <ValidationAlert></ValidationAlert>
           </Form>
         </Modal.Body>
         <Modal.Footer>

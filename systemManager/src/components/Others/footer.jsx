@@ -7,7 +7,7 @@ import { BsWhatsapp } from "react-icons/bs";
 const Footer = () => {
   return (
     <Container fluid className="">
-        <Row className="bg-dark align-items-center p-0.7 fixed-bottom">
+        <Row className="bg-dark align-items-center p-0.7 ">
             <Col></Col>
             <Col>
                 <p className="text-center text-white">Sistema de ecommerce y gestión integrada</p>

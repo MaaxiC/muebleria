@@ -6,7 +6,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 
 const Contact = () => {
   return (
-    <Container fluid="lg">
+    <Container className="custom-margin-top" fluid="lg">
         <Row className="justify-content-center mt-5 text-center">
             <Col md="auto">
                 <h2>Horarios de atencion:</h2>
@@ -18,7 +18,7 @@ const Contact = () => {
             </Col>
         </Row>              
       <Row>
-        <Col>
+        <Col className='margin-top-550'>
             <CardGroup className="p-4 mt-3">
                 <Card className='align-items-center text-center border-0'>
                     <Card.Img variant="top" src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" style={{width: "50%", position: "center"}}/>

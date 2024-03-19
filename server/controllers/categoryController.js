@@ -10,8 +10,8 @@ class CategoryController {
       categories.sort((a, b) => {
         var textA = a.nombre.toUpperCase()
         var textB = b.nombre.toUpperCase()
-        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0
-      })
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0
+      })
       res.send(categories);
     } catch (error) {
       res

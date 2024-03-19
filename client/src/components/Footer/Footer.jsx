@@ -7,7 +7,7 @@ import { BsFacebook } from "react-icons/bs";
 const Footer = () => {
   return (
     <Container fluid className="">
-        <Row className=" footer align-items-center p-4 fixed-bottom">
+        <Row className="footer align-items-center p-2 fixed-bottom">
             <Col></Col>
             <Col>
                 <p className="text-center text-white">Nácar - Todos los derechos reservados</p>
