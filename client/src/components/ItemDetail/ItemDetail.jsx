@@ -56,12 +56,11 @@ const ItemDetail = () => {
   const addToCart = () => {
     if ((data.stock - data.stockComprometido) >= (quantity + qty)) {
       increaseCartQuantity(parseInt(itemId), qty)
-      navigate('/cart')
     } 
   }
 
   return (
-    <Container>
+    <Container className="custom-margin-top">
         <Card
             className="m-5 text-center h-100"
             style={{

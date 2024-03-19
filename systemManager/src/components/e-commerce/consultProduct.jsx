@@ -63,7 +63,7 @@ export function ConsultProduct() {
             Agregar nuevo producto
           </Button>
         </Container>
-        <Table bordered hover variant="light">
+        <Table bordered hover variant="dark" responsive>
           <thead>
             <tr>
               <th>#</th>
@@ -91,8 +91,8 @@ export function ConsultProduct() {
                 <td>
                   <Container className="d-md-flex justify-content-center">
                   <Button
-                      className="btn btn-primary"
-                      style={{ marginLeft: "10px" }}
+                      className="btn btn-primary "
+                      style={{ marginLeft: "10px", margin:"5px"}}
                       onClick={() => {
                         setModalEditShow(true);
                         setProductoElegido(producto.id);
@@ -107,8 +107,8 @@ export function ConsultProduct() {
                       Editar
                     </Button>
                     <Button
-                      className="btn btn-warning"
-                      style={{ marginLeft: "10px" }}
+                      className="btn btn-warning "
+                      style={{ marginLeft: "10px", margin:"5px" }}
                       onClick={() => {
                         setProductoElegido(producto.id);
                         setModalUpdateShow(true);
@@ -118,9 +118,9 @@ export function ConsultProduct() {
                       Ajustar
                     </Button>
                     <Button
-                      className="btn btn-danger"
+                      className="btn btn-danger "
                       variant=""
-                      style={{ marginLeft: "10px" }}
+                      style={{ marginLeft: "10px", margin:"5px" }}
                       onClick={() => handleDeleteProduct(producto.id)}
                     >
                       Eliminar

@@ -15,13 +15,11 @@ import { Category } from "./components/e-commerce/categories";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ProtectedRoute } from "./components/protectedRoutes/protectedRoutes";
 import { AboutUs } from "./components/e-commerce/about";
-import  Charts  from "./components/Others/charts";
+import { Params } from "./components/e-commerce/parameters";
 
 const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
-
 
 root.render(
   <>
@@ -95,11 +93,11 @@ root.render(
                 }
               ></Route>
               <Route
-                path="/Others/chartTest"
+                path="/e-commerce/parameters"
                 element={
                   <>
                     <NavBar />
-                    <Charts />
+                    <Params />
                   </>
                 }
               ></Route>

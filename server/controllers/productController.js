@@ -7,7 +7,12 @@ class ProductController {
   static async getProducts(req, res) {
     try {
       const products = await ProductApi.getAll();
-      res.send(products);
+      products.sort((a, b) => {
+        var textA = a.nombre.toUpperCase()
+        var textB = b.nombre.toUpperCase()
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0
+      })
+      res.send(products);  
     } catch (error) {
       res
         .status(500)

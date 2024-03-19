@@ -1,25 +1,54 @@
-.card-product:hover{
-    transform: scale(1.08);
-    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+.card-product:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
 }
 
 .gradient-custom {
-  background: rgb(252,238,202);
-  background: linear-gradient(159deg, rgba(252,238,202,1) 40%, rgba(94,77,18,1) 100%);
-  color:black;
-  }
-
+  background: rgb(252, 238, 202);
+  background: linear-gradient(
+    159deg,
+    rgba(252, 238, 202, 1) 40%,
+    rgba(94, 77, 18, 1) 100%
+  );
+  color: black;
+}
 
 .gradient-custom-card {
-    background: rgb(55,70,213);
-background: linear-gradient(21deg, rgba(55,70,213,0.865983893557423) 18%, rgba(6,8,9,1) 100%);
+  background: rgb(55, 70, 213);
+  background: linear-gradient(
+    21deg,
+    rgba(55, 70, 213, 0.865983893557423) 18%,
+    rgba(6, 8, 9, 1) 100%
+  );
 }
 
 .custom-bg {
-  background-color: #695D3B;
+  background: rgb(252, 238, 202);
+  background: linear-gradient(
+    159deg,
+    rgba(252, 238, 202, 1) 0%,
+    rgba(147, 142, 127, 1) 96%
+  );
+}
+
+.dark-bg {
+  background: rgb(3, 17, 53);
+  background: linear-gradient(
+    159deg,
+    rgba(3, 17, 53, 1) 43%,
+    rgba(29, 59, 158, 1) 100%
+  );
+}
+
+.text-color-white{
+  color: white;
 }
 
 .footer {
   background-color: #747458;
+  position: absolute;
 }
- 
+
+.custom-mt{
+  margin-top: 190px;
+}

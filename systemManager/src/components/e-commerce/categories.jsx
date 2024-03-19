@@ -32,19 +32,17 @@ export function Category() {
           </Button>
         </Container>
         <br />
-        <Table striped bordered hover>
+        <Table striped bordered hover responsive>
           <thead>
             <tr>
-              <th>#</th>
               <th>Id</th>
               <th>Nombre</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            {Categorias.map((categoria, index) => (
+            {Categorias.map((categoria) => (
               <tr key={categoria.id}>
-                <td>{index + 1}</td>
                 <td>{categoria.id}</td>
                 <td>{categoria.nombre}</td>
                 <td>
