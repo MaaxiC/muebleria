@@ -32,7 +32,6 @@ export function ProductModal(props) {
       name === "" ||
       description === "" ||
       code === "" ||
-      photo === "" ||
       price === "" ||
       InitialStock === "" ||
       category === ""
@@ -40,6 +39,11 @@ export function ProductModal(props) {
       alert("Todos los campos deben estar completos");
       return;
     } else {
+      console.log(photo);
+      if (photo.length === 0) {
+        alert("Seleccione al menos una imagen para subir");
+        return;
+      }
       try {
         await addProduct({
           nombre: name,
@@ -108,13 +112,22 @@ export function ProductModal(props) {
               />
             </Form.Group>
 
-            <Form.Group className="mb-1" controlId="formBasicNumber">
+            {/* <Form.Group className="mb-1" controlId="formBasicNumber">
               <Form.Label>Foto</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Ingrese link de imagen"
                 value={photo}
                 onChange={(e) => setPhoto(e.target.value)}
+              />
+            </Form.Group> */}
+            <Form.Group className="mb-1" controlId="formBasicNumber">
+              <Form.Label>Imagen</Form.Label>
+              <Form.Control
+                type="file"
+                multiple
+                accept= "image/png, image/jpeg, image/jpg"
+                onChange={(e) => setPhoto(e.target.files)}
               />
             </Form.Group>
 

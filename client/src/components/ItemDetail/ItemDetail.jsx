@@ -12,6 +12,7 @@ import { AiOutlineMinus } from 'react-icons/ai'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import Carousel from 'react-bootstrap/Carousel';
 
 const ItemDetail = () => {
   const { itemId } = useParams();
@@ -56,7 +57,6 @@ const ItemDetail = () => {
   const addToCart = () => {
     if ((data.stock - data.stockComprometido) >= (quantity + qty)) {
       increaseCartQuantity(parseInt(itemId), qty)
-      navigate('/cart')
     } 
   }
 
@@ -70,7 +70,16 @@ const ItemDetail = () => {
         >
             <div className="details">
                 <div className="big-img">
-                    <img src={data.foto} alt="foto"/>
+                  <Carousel className="Carousel justify-content-center">
+                    {data.foto.map((foto, index) => (
+                    <Carousel.Item key={index}>
+                      <img
+                        src={`http://localhost:4000/img/${(foto)}`}
+                        alt="Imagen"
+                      />
+                    </Carousel.Item>
+                    ))}
+                  </Carousel>
                 </div>
                 <div className="box">
                     <Row>

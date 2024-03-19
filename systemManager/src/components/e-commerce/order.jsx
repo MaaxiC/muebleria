@@ -9,7 +9,8 @@ export function Order() {
   const { data } = useQuery(["orders"], fetchOrders, {
     staleTime: 6000,
   });
-  const Ordenes = data;
+
+  const Ordenes = data ? data : undefined;
 
   const changeOrder = async (id, estado) => {
     try {

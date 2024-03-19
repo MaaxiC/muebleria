@@ -3,12 +3,12 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 export const fetchProducts = async () => {
-    const { data } = await axios.get('http://localhost:4000/api/productos');
+    const { data } = await axios.get(`http://localhost:4000/api/productos/${window.location.search}`);
     return data;
 };
 
 export const addProduct = async (product) => {
-    const { data } = await axios.post('http://localhost:4000/api/productos', product);
+    const { data } = await axios.postForm('http://localhost:4000/api/productos', product);
     return data;
 };
 

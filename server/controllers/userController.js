@@ -1,4 +1,3 @@
-import { parse } from "dotenv";
 import { UserDao } from "../daos/index.js";
 import { ERROR, joiValidator } from "../utils/index.js";
 

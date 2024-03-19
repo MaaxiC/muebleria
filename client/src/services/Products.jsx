@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const fetchProducts = async () => {
-    const { data } = await axios.get('http://localhost:4000/api/productos');
+    const { data } = await axios.get(`http://localhost:4000/api/productos/${window.location.search}`);
     return data;
 };
 
@@ -11,6 +11,6 @@ export const fetchOneProduct = async (id) => {
 };
 
 export const fetchCategories = async () => {
-    const { data } = await axios.get('http://localhost:4000/api/categorias');
+    const { data } = await axios.get('http://localhost:4000/api/categorias/');
     return data;
 };

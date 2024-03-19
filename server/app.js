@@ -14,6 +14,8 @@ import knexSessionStore from "connect-session-knex";
 import knex from 'knex'
 import passport from "passport";
 import { initializePassport } from "./config/passport.js";
+import path from "path";
+import { __dirname } from "./utils.js";
 
 const app = express();
 const KnexSessionStore = knexSessionStore(session);
@@ -55,7 +57,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Archivos estaticos
-//app.use(express.static(path.join(__dirname, "public")));
+app.use('/img', express.static(path.join(__dirname, "public/uploads")));
 
 //Rutas
 app.use(config.server.routes.products, productRouter);
@@ -63,9 +65,5 @@ app.use(config.server.routes.categories, categoryRouter);
 app.use(config.server.routes.auth, authRouter);
 app.use(config.server.routes.users, userRouter);
 app.use(config.server.routes.orders, orderRouter);
-
-app.use((req, res) => {
-  res.status(404).send({ status: "error", error: "Invalid Request" });
-});
 
 export default app;

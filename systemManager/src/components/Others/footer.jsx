@@ -14,7 +14,7 @@ const Footer = () => {
             </Col>
             <Col>
                 <div className="d-flex justify-content-center">
-                    <h2><a className="text-white p-2" href="https://api.whatsapp.com/send/?phone=%2B5493512166302&text&type=phone_number&app_absent=0" target="_blank"><BsWhatsapp/></a></h2>
+                    <h2><a className="text-white p-2" href="https://api.whatsapp.com/send/?phone=%2B5493512166302&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer"><BsWhatsapp/></a></h2>
                 </div>  
             </Col>
         </Row>

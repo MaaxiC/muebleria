@@ -7,6 +7,8 @@ const NO_STOCK = "Stock insuficiente";
 const NO_STOCK_COMPROMISE = "Stock comprometido insuficiente";
 const INVALID_ACTIVE = "Estado invalido";
 const NO_ORDER = "Orden no encontrada";
+const INVALID_LIMIT = "Limite invalido";
+const INVALID_PAGE = "Pagina invalido";
 
 export const ERROR = {
   MESSAGE: {
@@ -19,5 +21,7 @@ export const ERROR = {
     NO_STOCK_COMPROMISE,
     INVALID_ACTIVE,
     NO_ORDER,
+    INVALID_LIMIT,
+    INVALID_PAGE,
   },
 };

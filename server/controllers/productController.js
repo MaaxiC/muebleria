@@ -1,12 +1,34 @@
 import { ProductDao } from "../daos/index.js";
 import { ERROR, joiValidator } from "../utils/index.js";
+import { Upload } from "../middlewares/upload.js";
 
 const ProductApi = new ProductDao();
 
 class ProductController {
   static async getProducts(req, res) {
     try {
-      const products = await ProductApi.getAll();
+      let limit = req.query.limit ? req.query.limit : 10;
+      let page = req.query.page ? req.query.page : 1;
+      if (limit && isNaN(limit))
+        return res
+          .status(404)
+          .send({ status: "error", error: ERROR.MESSAGE.INVALID_LIMIT });
+      limit = parseInt(limit)
+      if (page && isNaN(page))
+        return res
+          .status(404)
+          .send({ status: "error", error: ERROR.MESSAGE.INVALID_PAGE });
+      page = parseInt(page)
+      let offset = (page - 1) * limit;
+      const products = await ProductApi.getAll(limit, offset);
+      products.sort((a, b) => {
+        var textA = a.nombre.toUpperCase()
+        var textB = b.nombre.toUpperCase()
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0
+      })
+      products.forEach(product => {
+        product.foto = JSON.parse(product.foto)
+      });
       res.send(products);
     } catch (error) {
       res
@@ -23,6 +45,7 @@ class ProductController {
         return res
           .status(404)
           .send({ status: "error", error: ERROR.MESSAGE.NO_PRODUCT });
+      product.foto = JSON.parse(product.foto)
       res.send(product);
     } catch (error) {
       res
@@ -33,19 +56,32 @@ class ProductController {
 
   static async createProduct(req, res) {
     try {
-      const { nombre, descripcion, codigo, foto, precio, stock, categoria } = req.body;
-      const product = await joiValidator.product.validateAsync({
-        nombre,
-        descripcion,
-        codigo,
-        foto,
-        precio,
-        stock,
-        categoria
+      Upload(req, res, async (err) => {
+        if (!err && req.files == ""){
+          return res
+          .status(400)
+          .send({ status: "error", error: "Seleccione al menos una imagen para subir" });
+        } 
+        if (err){
+          return res
+          .status(400)
+          .send({ status: "error", error: "Solo se permiten imagenes" });
+        }
+        const { nombre, descripcion, codigo, precio, stock, categoria } = req.body;
+        const product = await joiValidator.product.validateAsync({
+          nombre,
+          descripcion,
+          codigo,
+          precio,
+          stock,
+          categoria
+        });
+        product.foto = req.files.map(file => file.filename)
+        product.foto = JSON.stringify(product.foto)
+        product.stockComprometido = 0
+        const productSaved = await ProductApi.save(product);
+        res.send(productSaved);
       });
-      product.stockComprometido = 0
-      const productSaved = await ProductApi.save(product);
-      res.send(productSaved);
     } catch (error) {
       if (error._original)
         return res
@@ -60,17 +96,14 @@ class ProductController {
   static async updateProduct(req, res) {
     try {
       const { id } = req.params;
-      
-      const { nombre, descripcion, codigo, foto, precio, categoria } = req.body;
+      const { nombre, descripcion, codigo, precio, categoria } = req.body;
       const product = await joiValidator.product.validateAsync({
         nombre,
         descripcion,
         codigo,
-        foto,
         precio,
         categoria
       });
-      
       const productSaved = await ProductApi.update(id, product);
       if (!productSaved || productSaved.kind)
         return res

@@ -12,7 +12,6 @@ export function EditProductModal(props) {
   const [name, setProduct] = useState("");
   const [description, setDescription] = useState("");
   const [code, setCode] = useState("");
-  const [photo, setPhoto] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
 
@@ -31,7 +30,6 @@ export function EditProductModal(props) {
     setProduct(tituloProd);
     setDescription(descripcionProd);
     setCode(codigoProd);
-    setPhoto(fotoProd);
     setPrice(precioProd);
     setCategory(categoriaProd);
   }, [tituloProd, descripcionProd, codigoProd, fotoProd, precioProd, categoriaProd]);
@@ -42,7 +40,6 @@ export function EditProductModal(props) {
       name === "" ||
       description === "" ||
       code === "" ||
-      photo === "" ||
       price === "" ||
       category === ""
     ) {
@@ -54,7 +51,6 @@ export function EditProductModal(props) {
           nombre: name,
           descripcion: description,
           codigo: code,
-          foto: photo,
           precio: price,
           categoria: category,
         });
@@ -112,16 +108,6 @@ export function EditProductModal(props) {
                 placeholder="Escribe el código..."
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-1" controlId="formBasicNumber">
-              <Form.Label>Foto</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Ingrese link de imagen"
-                value={photo}
-                onChange={(e) => setPhoto(e.target.value)}
               />
             </Form.Group>
 

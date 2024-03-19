@@ -23,9 +23,9 @@ const CartItem = ({ id, quantity }) => {
     <Stack direction="horizontal" gap={3} className="d-flex align-items-center">
       <div className="col d-none d-md-block">
         <img
-          src={item.foto}
+          src={`http://localhost:4000/img/${(item.foto)[0]}`}
           alt="foto"
-          style={{ width: "125px", height: "100px", objectFit: "cover" }}
+          style={{ width: "125px", height: "125px", objectFit: "cover" }}
         />
       </div>
       <div className="col">
