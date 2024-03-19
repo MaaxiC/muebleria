@@ -14,9 +14,11 @@ export function NavBar() {
   };
   return (
     <Navbar
+      className="md-6"
       expand="lg"
       sticky="top"
-      className="md-6 gradient-custom"
+      bg="dark"
+      data-bs-theme="light"
     >
       <Container fluid>
         <Link to={"/"} />
@@ -26,29 +28,49 @@ export function NavBar() {
             width="50"
             height="50"
             className="d-inline-block align-center"
-            alt="P11 Tecnología"
+            alt="Nacar"
           />
         </Navbar.Brand>
-        <Navbar.Brand href="/e-commerce/dashboard">Panel de control</Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Toggle
+          className="text-color-white"
+          aria-controls="navbarScroll"
+        />
         <Navbar.Collapse id="navbarScroll">
           <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
+            className="text-color-white me-auto my-2 my-lg-0"
+            style={{ maxHeight: "100px", color: "white" }}
             navbarScroll
             placement="center"
           >
             <LinkContainer to="/e-commerce/dashboard">
-              <Nav.Link>Inicio</Nav.Link>
+              <Nav.Link className="text-color-white">Inicio</Nav.Link>
             </LinkContainer>
-            <Nav.Link href="/e-commerce/consultProduct">Productos</Nav.Link>
-            <Nav.Link href="/e-commerce/categories" id="basic-nav-dropdown">Categorías</Nav.Link>
-            <Nav.Link href="/e-commerce/order">Ventas</Nav.Link>
-            <Nav.Link href="/e-commerce/categories">Categorías</Nav.Link>
-            <Nav.Link href="/e-commerce/order">Órdenes</Nav.Link>
-            <Nav.Link href="/Others/chartTest">Métricas</Nav.Link>
-            <Nav.Link href="/e-commerce/about">Acerca de...</Nav.Link>
-            <Nav.Link className="text-primary" onClick={logout}>
+            <Nav.Link
+              className="text-color-white"
+              href="/e-commerce/consultProduct"
+            >
+              Productos
+            </Nav.Link>
+            <Nav.Link
+              className="text-color-white"
+              href="/e-commerce/categories"
+              id="basic-nav-dropdown"
+            >
+              Categorías
+            </Nav.Link>
+            <Nav.Link className="text-color-white" href="/e-commerce/order">
+              Ventas
+            </Nav.Link>
+            <Nav.Link
+              className="text-color-white"
+              href="/e-commerce/parameters"
+            >
+              Parámetros
+            </Nav.Link>
+            <Nav.Link className="text-color-white" href="/e-commerce/about">
+              Acerca de...
+            </Nav.Link>
+            <Nav.Link className="text-success" onClick={logout}>
               Cerrar sesión
             </Nav.Link>
           </Nav>

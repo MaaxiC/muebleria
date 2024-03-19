@@ -5,18 +5,18 @@ import Col from "react-bootstrap/Col";
 
 const AboutUs = () => {
   return (
-    <Container>
+    <Container className="custom-margin-top">
       <Row className="justify-content-center mt-5">
         <Col md="auto">
           <Card>
             <Card.Img
               variant="top"
-              src="https://i.imgur.com/ZAOzV16.jpeg"
+              src="/images/nacarentucasa.jpg"
               height="500"
               className="img-fluid"
             />
             <Card.Body>
-              <p className="text-center">
+              <p className="custom-font.size text-center">
                 Nacar es una empresa familiar dedicada al rubro doméstico.
                 Producimos variedad de mobiliario destinado a la contención de
                 las plantas que dan vida a tu casa, y proyectamos un paulatino

@@ -1,6 +1,7 @@
 import React from "react";
 import Item from "../Others/card";
 import Footer from "../Others/footer";
+import { Container } from "react-bootstrap";
 
 const Vcards = [
   {
@@ -25,19 +26,19 @@ const Vcards = [
     id: 4,
     title: "Parámetros",
     image: "../images/parametros.png",
-    link: "#",
+    link: "/e-commerce/parameters",
   },
   {
     id: 5,
-    title: "Métricas",
-    image: "../images/metricas.png",
-    link: "#",
+    title: "Mi página",
+    image: "../images/mipagina.png",
+    //link:"REDIRECCION A WEB CLIENTE"
   },
   {
     id: 6,
-    title: "Mi página",
-    image: "../images/mipagina.png",
-    //redireccion a pagina cliente
+    title: "Ayuda",
+    image: "../images/ayuda.png",
+    link: "#",
   },
   {
     id: 7,
@@ -56,20 +57,22 @@ const Vcards = [
 export function Dashboard() {
   return (
     <>
-      <div className="container h-100 align-items-center mt-2">
-        <h1 className="text-center my-4">¡Hola de nuevo!</h1>
-        <div className="row ">
-          {Vcards.map((card) => (
-            <div className="col-md-3" key={card.id}>
-              <Item
-                title={card.title}
-                image={card.image}
-                link={card.link}
-              ></Item>
-            </div>
-          ))}
-        </div>
-      </div>
+      <Container fluid className="text-center" >
+        <Container className="align-items-center h-100 " centered>
+          <h1 className="text-center text-color-white my-4">¡Hola de nuevo!</h1>
+          <div className="row">
+            {Vcards.map((card) => (
+              <div className="col-md-3" key={card.id}>
+                <Item
+                  title={card.title}
+                  image={card.image}
+                  link={card.link}
+                ></Item>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </Container>
       <br />
       <Footer />
     </>

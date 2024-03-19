@@ -126,7 +126,7 @@ export function EditProductModal(props) {
             </Form.Group>
 
             <Form.Group className="mb-1" controlId="formBasicNumber">
-              <Form.Label>Precio</Form.Label>
+              <Form.Label>Precio ($)</Form.Label>
               <Form.Control
                 type="number"
                 placeholder="Escribe el precio..."

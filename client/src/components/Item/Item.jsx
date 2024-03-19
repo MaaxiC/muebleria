@@ -10,7 +10,7 @@ const Item = ({product}) => {
         <Card.Img variant="top" src={foto} height="250px" style={{ objectFit: "cover"}}/>
         <Card.Body>
             <Card.Title>{nombre}</Card.Title>
-            <Card.Title className='p-3 text-muted'>${precio}</Card.Title>
+            <Card.Title className='p-3 text-success'>${precio}</Card.Title>
         </Card.Body>
     </Card>
   );

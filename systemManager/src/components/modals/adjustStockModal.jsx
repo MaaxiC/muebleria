@@ -3,6 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import { Form } from "react-bootstrap";
 import React, { useState } from "react";
 import { updateStock } from "../../services/products";
+import { ValidationAlert } from "./validationModals";
 
 export function StockModal(props) {
   const [stock, setStock] = useState(0);

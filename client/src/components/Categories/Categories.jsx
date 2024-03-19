@@ -18,11 +18,11 @@ const Categories = () => {
   });
 
   const categoryValue = categories.data?.map((c) => {
-    if (c.id === category) return c.nombre;
+    if (c.id == category) return c.nombre;
   });
 
   const filterProductByCategory = data?.filter(
-    (product) => product.categoria === category
+    (product) => product.categoria == category
   );
 
   if (isLoading)
@@ -38,7 +38,6 @@ const Categories = () => {
         <h4>Error al obtener los productos</h4>
       </div>
     );
-
   return (
     <Container>
       <Row className="p-2 justify-content-center mt-5">
@@ -56,7 +55,9 @@ const Categories = () => {
         )}
       </Row>
     </Container>
+    
   );
+
 };
 
 export default Categories;

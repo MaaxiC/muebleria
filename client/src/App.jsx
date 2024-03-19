@@ -17,7 +17,7 @@ import ItemDetailPage from './pages/ItemDetailPage';
 
 const App = () => {
   return (
-    <div className='App'>
+    <div className='App min-height-100vh'>
       <CartProvider>
         <BrowserRouter>
           <NavBar/>
