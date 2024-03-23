@@ -1,7 +1,7 @@
 import {
   fetchCategories,
   deleteProduct,
-  fetchProductsByPage
+  fetchProductsByPage,
 } from "../../services/products";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
@@ -29,33 +29,30 @@ export function ConsultProduct() {
     );
   };
 
-
   //optimizar
   const [modalCreateShow, setModalCreateShow] = React.useState(false);
   const [modalUpdateShow, setModalUpdateShow] = React.useState(false);
   const [modalEditShow, setModalEditShow] = React.useState(false);
   const [modalDeleteShow, setModalDeleteShow] = React.useState(false);
 
-  const [productoelegido, setProductoElegido] = React.useState('');
-  const [tituloProducto, setTitulo] = React.useState('');
-  const [descripcionProducto, setDescripcionProducto] = React.useState('');
-  const [codigoProducto, setCodigoProducto] = React.useState('');
+  const [productoelegido, setProductoElegido] = React.useState("");
+  const [tituloProducto, setTitulo] = React.useState("");
+  const [descripcionProducto, setDescripcionProducto] = React.useState("");
+  const [codigoProducto, setCodigoProducto] = React.useState("");
   const [productToDelete, setCodigoBorrar] = React.useState("");
-  const [fotoProducto, setFotoProducto] = React.useState('');
-  const [precioProducto, setPrecioProducto] = React.useState('');
-  const [categoriaProducto, setCategoriaProducto] = React.useState('');
+  const [fotoProducto, setFotoProducto] = React.useState("");
+  const [precioProducto, setPrecioProducto] = React.useState("");
+  const [categoriaProducto, setCategoriaProducto] = React.useState("");
   const [page, setPage] = useState(1);
 
-  const { data, isLoading, refetch } = useQuery(["productsTable", page], () => fetchProductsByPage(page), {
-    staleTime: 60000,
-  });
+  const { data, isLoading, refetch } = useQuery(
+    ["productsTable", page],
+    () => fetchProductsByPage(page),
+    {
+      staleTime: 60000,
+    }
+  );
   const Productos = data;
-
-    // const handleDeleteProduct = async (productId) => {
-  //   await deleteProduct(productId);
-  //   await refetch();
-  //   window.location.reload();
-  // };
 
   if (isLoading) return "Cargando...";
 
@@ -119,7 +116,6 @@ export function ConsultProduct() {
                       onClick={() => {
                         setProductoElegido(producto.id);
                         setModalUpdateShow(true);
-                        setTitulo(producto.nombre);
                       }}
                     >
                       Ajustar
@@ -129,7 +125,8 @@ export function ConsultProduct() {
                       style={{ marginLeft: "10px", margin: "5px" }}
                       onClick={() => {
                         setCodigoBorrar(producto.id);
-                        setModalDeleteShow(true);                        
+                        setTitulo(producto.nombre);
+                        setModalDeleteShow(true);
                       }}
                     >
                       Eliminar
@@ -159,15 +156,15 @@ export function ConsultProduct() {
           </div>
         </Row>
       </Container>
-        <Container className="d-md-flex my-4 justify-content-end">
-          <Button
-            className="btn btn-info"
-            style={{ marginLeft: "10px", marginRight: "10px" }}
-            onClick={() => exportToExcel("ProductTable", "Productos")}
-          >
-            Exportar datos a Excel
-          </Button>
-        </Container>
+      <Container className="d-md-flex my-4 justify-content-end">
+        <Button
+          className="btn btn-info"
+          style={{ marginLeft: "10px", marginRight: "10px" }}
+          onClick={() => exportToExcel("ProductTable", "Productos")}
+        >
+          Exportar datos a Excel
+        </Button>
+      </Container>
       <ProductModal
         show={modalCreateShow}
         onHide={() => setModalCreateShow(false)}
@@ -192,7 +189,10 @@ export function ConsultProduct() {
       <ConfirmDeleteModal
         show={modalDeleteShow}
         onHide={() => setModalDeleteShow(false)}
-        id={productToDelete}              
+        id={productToDelete}
+        titulo={tituloProducto}
+        name="Producto"
+        mensaje="el producto "
       />
       <Footer />
     </>

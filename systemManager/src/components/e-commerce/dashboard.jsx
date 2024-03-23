@@ -2,6 +2,7 @@ import React from "react";
 import Item from "../Others/card";
 import Footer from "../Others/footer";
 import { Container } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 const logout = () => {
   localStorage.removeItem("user");
@@ -43,19 +44,13 @@ const Vcards = [
     id: 6,
     title: "Ayuda",
     image: "../images/ayuda.png",
-    link: "#",
+    link: "/e-commerce/help",
   },
   {
     id: 7,
     title: "Acerca de...",
     image: "../images/acercade.png",
     link: "/e-commerce/about",
-  },
-  {
-    id: 8,
-    title: "Cerrar sesión",
-    image: "../images/cerrarsesion.png",
-    link: "/",
   },
 ];
 
@@ -75,6 +70,27 @@ export function Dashboard() {
                 ></Item>
               </div>
             ))}
+            <Card
+              className="bg-dark p-3 m-3 text-center card-product nav-link text-light"
+              style={{
+                width: "18rem",
+                height: "23rem",
+                cursor: "pointer",
+                boxShadow:
+                  "0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06)",
+              }}
+              onClick={logout}
+            >
+              <Card.Img
+                variant="top"
+                src="../images/cerrarsesion.png"
+                height="250px"
+                style={{ objectFit: "cover" }}
+              />
+              <Card.Body>
+                <Card.Title>Cerrar Sesión</Card.Title>
+              </Card.Body>
+            </Card>
           </div>
         </Container>
       </Container>

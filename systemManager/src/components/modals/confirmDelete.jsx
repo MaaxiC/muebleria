@@ -1,6 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { deleteProduct, deleteCategory } from "../../services/products";
+import Swal from "sweetalert2";
 
 //para cambiar titulos y texto usar las props solamente
 //revisar como valido actualizacion de ordenes
@@ -8,11 +9,11 @@ import { deleteProduct, deleteCategory } from "../../services/products";
 export function ConfirmDeleteModal(props) {
   const HandleDelete = async () => {
     switch (props.name) {
-      case "Product":
+      case 'Producto':
         await deleteProduct(props.id);
         break;
 
-      case "Category":
+      case "Categoría":
         await deleteCategory(props.id);
         break;
     }
@@ -27,17 +28,18 @@ export function ConfirmDeleteModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          <h4>Eliminar Registro</h4>
+          <h4>Eliminar {props.name}</h4>
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <p>¿Seguro desea eliminar este registro?</p>
+      <Modal.Body >
+       ¿Seguro desea eliminar {props.mensaje + props.titulo} ?
       </Modal.Body>
       <Modal.Footer>
         <Button
           variant="danger"
           onClick={() => {
             HandleDelete();
+            window.location.reload();
           }}
         >
           Eliminar

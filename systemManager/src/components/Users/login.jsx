@@ -14,7 +14,7 @@ export function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const user = await loginUser({ usuario: username, password });
+      const user = await loginUser({ usuario: username, password: password});
       localStorage.setItem("user", JSON.stringify(user.payload));
       window.location.replace("/e-commerce/dashboard");
     } catch (error) {
@@ -64,12 +64,10 @@ export function Login() {
           <Button variant="success" type="submit">
             Acceder
           </Button>
-
           <br />
         </Form>
       </Container>
       <Container className="custom-mt">
-
       </Container>
     </>
   );

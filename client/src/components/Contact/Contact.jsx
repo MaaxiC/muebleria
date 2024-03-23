@@ -21,7 +21,7 @@ const Contact = () => {
         <Col className='margin-top-550'>
             <CardGroup className="p-4 mt-3">
                 <Card className='align-items-center text-center border-0'>
-                    <Card.Img variant="top" src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" style={{width: "50%", position: "center"}}/>
+                    <Card.Img variant="top" src="/images/wspicon.png" style={{width: "50%", position: "center"}}/>
                     <Card.Body>
                     <Card.Title>WhatsApp</Card.Title>
                     <Card.Text>
@@ -30,7 +30,7 @@ const Contact = () => {
                     </Card.Body>
                 </Card>
                 <Card className='align-items-center text-center border-0'>
-                    <Card.Img variant="top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png" style={{width: "50%", position: "center"}}/>
+                    <Card.Img variant="top" src="/images/igicon.jpg" style={{width: "50%", position: "center"}}/>
                     <Card.Body>
                     <Card.Title>Instagram</Card.Title>
                     <Card.Text>
@@ -39,7 +39,7 @@ const Contact = () => {
                     </Card.Body>
                 </Card>
                 <Card className='align-items-center text-center p-2 border-0'>
-                    <Card.Img variant="top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/2560px-Gmail_icon_%282020%29.svg.png" style={{width: "60%", position: "center"}}/>
+                    <Card.Img variant="top" src="/images/gmicon.jpg" style={{width: "60%", position: "center"}}/>
                     <Card.Body>
                     <Card.Title>Mail</Card.Title>
                     <Card.Text>
