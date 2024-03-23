@@ -5,8 +5,8 @@ import Col from "react-bootstrap/Col";
 
 const FAQ = () => {
   return (
-    <Container>
-      <Row className="justify-content-center mt-4 text-center">
+    <Container className="custom-margin-top">
+      <Row className="justify-content-center text-center">
         <Col>
           <img
             className="img-fluid"

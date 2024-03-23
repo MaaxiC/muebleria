@@ -7,6 +7,11 @@ export const fetchProducts = async () => {
     return data;
 };
 
+export const fetchProductsByPage = async (page) => {
+    const { data } = await axios.get(`http://localhost:4000/api/productos/?page=${page}`);
+    return data;
+};
+
 export const addProduct = async (product) => {
     const { data } = await axios.postForm('http://localhost:4000/api/productos', product);
     return data;

@@ -70,7 +70,7 @@ const ItemDetail = () => {
         >
             <div className="details">
                 <div className="big-img">
-                  <Carousel className="Carousel justify-content-center">
+                  <Carousel className="justify-content-center">
                     {data.foto.map((foto, index) => (
                     <Carousel.Item key={index}>
                       <img

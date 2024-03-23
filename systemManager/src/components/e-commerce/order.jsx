@@ -1,14 +1,17 @@
-import { fetchOrders, updateOrder } from "../../services/orders";
+import { fetchOrdersByPage, updateOrder } from "../../services/orders";
 import { useQuery } from "@tanstack/react-query";
 import { Table } from "react-bootstrap";
 import { Container, Button } from "react-bootstrap";
 import { useState } from "react";
 import { EditOrderModal } from "../modals/editOrderModal";
 import Footer from "../Others/footer";
+import { Row } from "react-bootstrap";
 import {exportToExcel} from "../../services/exportData";
 
 export function Order() {
-  const { data } = useQuery(["orders"], fetchOrders, {
+  const [page, setPage] = useState(1);
+
+  const { data } = useQuery(["ordersTable", page], () => fetchOrdersByPage(page), {
     staleTime: 6000,
   });
 
@@ -104,6 +107,24 @@ export function Order() {
             ))}
           </tbody>
         </Table>
+        <Row>
+          <div className="d-flex justify-content-center">
+            <button
+              className="btn btn-primary"
+              onClick={() => setPage(page - 1)}
+              disabled={page === 1}
+            >
+              Anterior
+            </button>
+            <button
+              className="btn btn-primary"
+              onClick={() => setPage(page + 1)}
+              disabled={Ordenes?.length < 10}
+            >
+              Siguiente
+            </button>
+          </div>
+        </Row>
       </Container>
       <Container className="d-md-flex my-4 justify-content-end">
           <Button
