@@ -1,7 +1,4 @@
 import { DATE } from "../utils/index.js"
-import { attachPaginate } from 'knex-paginate'
-
-attachPaginate();
 
 class SqldbContainer {
     constructor (config, table){
@@ -9,9 +6,9 @@ class SqldbContainer {
         this.table = table
     }
 
-    async getAll(lim, off) {
+    async getAll() {
         try {
-            const rows = await this.config.from(this.table).select('*').limit(lim).offset(off);
+            const rows = await this.config.from(this.table).select('*');
             return rows
         } catch (error) {
             return []
@@ -52,7 +49,6 @@ class SqldbContainer {
     async deleteById(id) {
         try {
             const row = await this.config(this.table).where({ id: id }).del()
-            console.log(row)
             if (row != 1) return false
             return true
         } catch (error) {

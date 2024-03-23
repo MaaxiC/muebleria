@@ -33,7 +33,7 @@ export function AboutUs() {
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/2560px-Gmail_icon_%282020%29.svg.png" width={300} alt=""/>
           <br />
           <br />
-          <a className="text-white" href="https://gmail.com/" target="_blank">josuedominguez052@gmail.com</a>
+          <a className="text-white" href="https://gmail.com/" target="_blank" rel="noreferrer">josuedominguez052@gmail.com</a>
         </Container>
       </Container>
       <Footer />

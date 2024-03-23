@@ -1,4 +1,4 @@
-import { fetchCategories, deleteCategory } from "../../services/products";
+import { fetchCategories } from "../../services/products";
 import { useQuery } from "@tanstack/react-query";
 import { Container, Table } from "react-bootstrap";
 import { CategoryModal } from "../modals/categoryModal";
@@ -14,7 +14,7 @@ export function Category() {
   const [productToDelete, setCodigoBorrar] = React.useState("");
   const [tituloCategoria, setTituloCategoria] = React.useState("");
 
-  const { data, isLoading, refetch } = useQuery(
+  const { data, isLoading } = useQuery(
     ["categories"],
     fetchCategories,
     {
@@ -51,7 +51,6 @@ export function Category() {
                 <td>{categoria.id}</td>
                 <td>{categoria.nombre}</td>
                 <td>
-                  {/* <Button className="btn btn-primary">Editar</Button> */}
                   <Button
                       className="btn btn-danger "
                       style={{ marginLeft: "10px", margin: "5px" }}

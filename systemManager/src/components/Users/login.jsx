@@ -2,14 +2,12 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import React, { useState } from "react";
 import { loginUser } from "../../services/users";
-import Alert from "react-bootstrap/Alert";
 import { Container } from "react-bootstrap";
 import Swal from 'sweetalert2';
 
 export function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,7 +22,7 @@ export function Login() {
 
   return (
     <>
-      <Container centered>
+      <Container centered="true">
         <Form
           className="bg-dark card container h-100 col-md-4 custom-mt text-light"
           onSubmit={handleSubmit}

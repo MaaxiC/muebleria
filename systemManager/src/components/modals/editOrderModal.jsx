@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import { Form } from "react-bootstrap";
 import { useState } from "react";
 import { updateOrder } from "../../services/orders";
-import { ValidationAlert } from "./validationModals";
+import Swal from 'sweetalert2';
 
 export function EditOrderModal(props) {
   const [order, setOrder] = useState(props.order);
@@ -16,9 +16,9 @@ export function EditOrderModal(props) {
       order.dni === "" ||
       order.montoTotal === ""
     ) 
-      return alert("Todos los campos deben estar completos");
+      return Swal.fire("Todos los campos deben estar completos");
     if (parseInt(order.dni) < 1000000 || parseInt(order.dni) > 99999999)
-      return alert("El DNI debe tener 8 dígitos");
+      return Swal.fire("El DNI debe tener 8 dígitos");
     try {
       await updateOrder(order.id, order);
       window.location.replace("/e-commerce/order");
@@ -86,7 +86,6 @@ export function EditOrderModal(props) {
             <Button variant="success my-3" type="submit">
               Actualizar
             </Button>
-            <ValidationAlert></ValidationAlert>
           </Form>
         </Modal.Body>
         <Modal.Footer>

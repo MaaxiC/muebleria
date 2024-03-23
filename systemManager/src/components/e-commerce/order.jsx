@@ -7,6 +7,7 @@ import { EditOrderModal } from "../modals/editOrderModal";
 import Footer from "../Others/footer";
 import { Row } from "react-bootstrap";
 import {exportToExcel} from "../../services/exportData";
+import Swal from "sweetalert2";
 
 export function Order() {
   const [page, setPage] = useState(1);
@@ -22,11 +23,11 @@ export function Order() {
       if (estado === "Confirmado") {
         await updateOrder(id, { estado: "Confirmado" });
         window.location.reload();
-        return alert("Orden confirmada correctamente"); //Cambiar por SweetAlert
+        return Swal.fire("Orden confirmada correctamente");
       }
       await updateOrder(id, { estado: "Rechazado" });
       window.location.reload();
-      alert("Orden rechazada correctamente"); //Cambiar por SweetAlert
+      Swal.fire("Orden rechazada correctamente");
     } catch (error) {
       alert(error.response.data.error);
     }
@@ -119,7 +120,7 @@ export function Order() {
             <button
               className="btn btn-primary"
               onClick={() => setPage(page + 1)}
-              disabled={Ordenes?.length < 10}
+              disabled={Ordenes?.length < 10 || !Ordenes?.length}
             >
               Siguiente
             </button>
@@ -131,7 +132,7 @@ export function Order() {
             className="btn btn-success"
             variant=""
             style={{ marginLeft: "10px", marginRight: "10px" }}
-            onClick={() => exportToExcel("OrderTable", "Ventas" + ' - ')}
+            onClick={() => exportToExcel("OrderTable", `Ventas - ${new Date().toLocaleDateString()}`)}
           > 
             Exportar datos a Excel
           </Button>

@@ -58,7 +58,7 @@ export function Dashboard() {
   return (
     <>
       <Container fluid className="text-center">
-        <Container className="align-items-center h-100 " centered>
+        <Container className="align-items-center h-100 " centered="true">
           <h1 className="text-center text-color-white my-4">¡Hola de nuevo!</h1>
           <div className="row">
             {Vcards.map((card) => (

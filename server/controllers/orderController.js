@@ -9,6 +9,7 @@ class OrderController {
     try {
       let limit = req.query.limit ? req.query.limit : 20;
       let page = req.query.page ? req.query.page : 1;
+      
       if (limit && isNaN(limit))
         return res
           .status(404)
@@ -20,8 +21,7 @@ class OrderController {
           .send({ status: "error", error: ERROR.MESSAGE.INVALID_PAGE });
       page = parseInt(page)
       let offset = (page - 1) * limit;
-      // const orders = await OrderApi.getAll(limit, offset);
-      const orders = await OrderDao.getAllByDate(limit, offset);
+      const orders = await OrderApi.constructor.getAllByDate(limit, offset);
       res.send(orders);
     } catch (error) {
       res

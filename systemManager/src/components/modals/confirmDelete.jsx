@@ -16,6 +16,8 @@ export function ConfirmDeleteModal(props) {
       case "Categoría":
         await deleteCategory(props.id);
         break;
+
+      default:
     }
   };
 

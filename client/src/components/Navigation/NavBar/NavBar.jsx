@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import CartWidget from "../CartWidget/CartWidget";
 import { Link, NavLink } from "react-router-dom";
-import { fetchCategories, fetchProducts } from "../../../services/Products";
+import { fetchCategories } from "../../../services/Products";
 import { useQuery } from "@tanstack/react-query";
 
 const NavBar = () => {
@@ -20,12 +20,6 @@ const NavBar = () => {
   const { data } = useQuery(["categories"], fetchCategories, {
     staleTime: 60000,
   });
-
-  const productsData = useQuery(["products"], fetchProducts, {
-    staleTime: 60000,
-  });
-
-  const products = productsData.data;
 
   return (
     <Navbar className="navbar-bg navbar-text fixed-top" expand="lg" onToggle={handleToggle} expanded={isOpen}>
@@ -50,8 +44,9 @@ const NavBar = () => {
               {data
                 ? data.map((data) => (
                     <NavDropdown.Item
-                      as={Link}
-                      to={`/categories/${data.id}`}
+                      href={`/categories/${data.id}`}
+                      // as={Link}
+                      // to={`/categories/${data.id}`}
                       className="navbar-bg navbar-text text-center py-2 "
                       key={data.id}
                       onClick={closeMenu}

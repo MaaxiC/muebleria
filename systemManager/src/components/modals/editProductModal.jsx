@@ -7,6 +7,7 @@ import {
   fetchCategories,
 } from "../../services/products";
 import { useQuery } from "@tanstack/react-query";
+import Swal from 'sweetalert2';
 
 export function EditProductModal(props) {
   const [name, setProduct] = useState("");
@@ -43,7 +44,7 @@ export function EditProductModal(props) {
       price === "" ||
       category === ""
     ) {
-      alert("Todos los campos deben estar completos");
+      Swal.fire("Todos los campos deben estar completos");
       return;
     } else {
       try {

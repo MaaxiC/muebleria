@@ -1,6 +1,5 @@
 import {
   fetchCategories,
-  deleteProduct,
   fetchProductsByPage,
 } from "../../services/products";
 import { useQuery } from "@tanstack/react-query";
@@ -45,7 +44,7 @@ export function ConsultProduct() {
   const [categoriaProducto, setCategoriaProducto] = React.useState("");
   const [page, setPage] = useState(1);
 
-  const { data, isLoading, refetch } = useQuery(
+  const { data, isLoading } = useQuery(
     ["productsTable", page],
     () => fetchProductsByPage(page),
     {
@@ -149,7 +148,7 @@ export function ConsultProduct() {
             <button
               className="btn btn-primary"
               onClick={() => setPage(page + 1)}
-              disabled={Productos.length < 10}
+              disabled={Productos?.length < 10 || !Productos?.length}
             >
               Siguiente
             </button>

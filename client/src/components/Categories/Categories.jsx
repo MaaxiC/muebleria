@@ -1,4 +1,4 @@
-import { fetchCategories } from "../../services/Products";
+import { fetchCategories, fetchProductsByCat, fetchCountByCat } from "../../services/Products";
 import { useQuery } from "@tanstack/react-query";
 import Item from "../Item/Item";
 import Container from "react-bootstrap/Container";
@@ -12,7 +12,7 @@ const Categories = () => {
 
   const { category } = useParams();
 
-  const { data, isLoading, isError } = useQuery(["productsCategories", page], () => fetchProductsByPage(page), {
+  const { data, isLoading, isError } = useQuery(["productsCategories", category, page], () => fetchProductsByCat(page, category), {
     staleTime: 60000,
   });
 
@@ -20,13 +20,14 @@ const Categories = () => {
     staleTime: 60000,
   });
 
+  const maxPagesCount = useQuery(["productsCategoriesCount", category ], () => fetchCountByCat(category), {
+    staleTime: 60000,
+  });
+  const maxPages = maxPagesCount?.data;
+
   const categoryValue = categories.data?.map((c) => {
     if (c.id == category) return c.nombre;
   });
-
-  const filterProductByCategory = data?.filter(
-    (product) => product.categoria == category
-  );
 
   if (isLoading)
     return (
@@ -44,11 +45,11 @@ const Categories = () => {
   return (
     <Container className="custom-margin-top">
       <Row className="p-2 justify-content-center">
-        {filterProductByCategory.length > 0 ? (
+        {data.length > 0 ? (
           <>
             <h1 className="my-3 text-center">{categoryValue}</h1>
-            {filterProductByCategory.map((data, idx) => (
-              <Item product={data} key={idx} />
+            {data.map((item, idx) => (
+              <Item product={item} key={idx} />
             ))}
           </>
         ) : (
@@ -69,7 +70,7 @@ const Categories = () => {
           <button
             className="btn btn-primary"
             onClick={() => setPage(page + 1)}
-            disabled={filterProductByCategory.length < 10}
+            disabled={maxPages && page === maxPages}
           >
             Siguiente
           </button>

@@ -5,13 +5,23 @@ export const fetchProducts = async () => {
     return data;
 };
 
-export const fetchProductsByPage = async (page) => {
-    const { data } = await axios.get(`http://localhost:4000/api/productos/?page=${page}`);
+export const fetchProductsByCat = async (page, category) => {
+    const { data } = await axios.get(`http://localhost:4000/api/productos/category=${category}?page=${page}`);
     return data;
 };
 
+export const fetchCountByCat = async (category) => {
+    const { data } = await axios.get(`http://localhost:4000/api/productos/count/category=${category}`);
+    return data.maxPages;
+};
+
 export const fetchRecProducts = async () => {
-    const { data } = await axios.get(`http://localhost:4000/api/productos/?limit=${4}&page=${1}`);
+    const { data } = await axios.get(`http://localhost:4000/api/productos/recommended`);
+    return data;
+};
+
+export const fetchFavProducts = async () => {
+    const { data } = await axios.get(`http://localhost:4000/api/productos/favorites`);
     return data;
 };
 

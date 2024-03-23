@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import { Form } from "react-bootstrap";
 import React, { useState } from "react";
 import { updateStock } from "../../services/products";
-import { ValidationAlert } from "./validationModals";
+import Swal from "sweetalert2";
 
 export function StockModal(props) {
   const [stock, setStock] = useState(0);
@@ -13,7 +13,7 @@ export function StockModal(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (stock === "") {
-      alert("Todos los campos deben estar completos");
+      Swal.fire("Todos los campos deben estar completos");
       return;
     } else {
       try {
