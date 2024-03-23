@@ -6,6 +6,7 @@ import { useState } from "react";
 import { EditOrderModal } from "../modals/editOrderModal";
 import Footer from "../Others/footer";
 import { Row } from "react-bootstrap";
+import {exportToExcel} from "../../services/exportData";
 
 export function Order() {
   const [page, setPage] = useState(1);
@@ -37,7 +38,7 @@ export function Order() {
   return (
     <>
       <Container className="align-center mt-4">
-        <Table striped bordered hover responsive>
+        <Table id="OrderTable" variant="dark" striped bordered hover responsive>
           <thead>
             <tr>
               <th>#</th>
@@ -125,6 +126,16 @@ export function Order() {
           </div>
         </Row>
       </Container>
+      <Container className="d-md-flex my-4 justify-content-end">
+          <Button
+            className="btn btn-success"
+            variant=""
+            style={{ marginLeft: "10px", marginRight: "10px" }}
+            onClick={() => exportToExcel("OrderTable", "Ventas" + ' - ')}
+          > 
+            Exportar datos a Excel
+          </Button>
+        </Container>
       <Footer />
       <EditOrderModal
         show={modalEditShow}

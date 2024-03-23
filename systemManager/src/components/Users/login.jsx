@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { loginUser } from "../../services/users";
 import Alert from "react-bootstrap/Alert";
 import { Container } from "react-bootstrap";
+import Swal from 'sweetalert2';
 
 export function Login() {
   const [username, setUsername] = useState("");
@@ -17,7 +18,7 @@ export function Login() {
       localStorage.setItem("user", JSON.stringify(user.payload));
       window.location.replace("/e-commerce/dashboard");
     } catch (error) {
-      setErrorMessage(error.response.data.error);
+      Swal.fire(error.response.data.error);
     }
   };
 
@@ -63,11 +64,7 @@ export function Login() {
           <Button variant="success" type="submit">
             Acceder
           </Button>
-          {errorMessage && (
-            <Alert variant="danger" className="mt-2">
-              {errorMessage}
-            </Alert>
-          )}
+
           <br />
         </Form>
       </Container>

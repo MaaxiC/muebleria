@@ -10,10 +10,10 @@ export function AboutUs() {
       <Container className="mb-4">
         <Row className="justify-content-center mt-5">
           <Col md="auto">
-            <Card>
+            <Card className="bg-dark">
               <Card.Img variant="top" src="../images/j&m.jpg" />
               <Card.Body>
-                <p className="text-center">
+                <p className="text-center text-white">
                   Josué Demaría y Maximiliano Carnero han creado este contenido
                   con dedicación, empleando tecnologías que garantizan
                   facilidad, rapidez y usabilidad para nuestros clientes. Todos
@@ -28,12 +28,12 @@ export function AboutUs() {
           </Col>
         </Row>
         <br />
-        <h4 className="text-center">Contacto</h4>
+        <h4 className="text-center text-white">Contacto</h4>
         <Container className="text-center">
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/2560px-Gmail_icon_%282020%29.svg.png" width={300} alt=""/>
           <br />
           <br />
-          <a href="https://gmail.com/" target="_blank">josuedominguez052@gmail.com</a>
+          <a className="text-white" href="https://gmail.com/" target="_blank">josuedominguez052@gmail.com</a>
         </Container>
       </Container>
       <Footer />
