@@ -3,6 +3,11 @@ import Item from "../Others/card";
 import Footer from "../Others/footer";
 import { Container } from "react-bootstrap";
 
+const logout = () => {
+  localStorage.removeItem("user");
+  window.location.replace("/");
+};
+
 const Vcards = [
   {
     id: 1,
@@ -12,7 +17,7 @@ const Vcards = [
   },
   {
     id: 2,
-    title: "Ordenes",
+    title: "Ventas",
     image: "../images/ordenes.png",
     link: "/e-commerce/order",
   },
@@ -57,7 +62,7 @@ const Vcards = [
 export function Dashboard() {
   return (
     <>
-      <Container fluid className="text-center" >
+      <Container fluid className="text-center">
         <Container className="align-items-center h-100 " centered>
           <h1 className="text-center text-color-white my-4">¡Hola de nuevo!</h1>
           <div className="row">

@@ -6,6 +6,8 @@ import {
   addProduct,
   fetchCategories,
 } from "../../services/products";
+import Swal from 'sweetalert2';
+
 import { useQuery } from "@tanstack/react-query";
 
 export function ProductModal(props) {
@@ -36,12 +38,12 @@ export function ProductModal(props) {
       InitialStock === "" ||
       category === ""
     ) {
-      alert("Todos los campos deben estar completos");
+      Swal.fire("Todos los campos deben estar completos");
       return;
     } else {
       console.log(photo);
       if (photo.length === 0) {
-        alert("Seleccione al menos una imagen para subir");
+        Swal.fire("Seleccione al menos una imagen para subir");
         return;
       }
       try {

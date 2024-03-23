@@ -10,18 +10,17 @@ export function Params() {
     <>
       <br />
       <Container>
-        <h2 className="text-center">Parámetros visuales</h2>
+        <h2 className="text-center text-white">Parámetros visuales</h2>
         <Container
-          className="card container custom-bg h-100 col-md-9 mt-5 ml-4 mr-5"
-          
+          className="card container bg-dark h-100 col-md-9 mt-5 ml-4 mr-5"         
         >
           <br />
           <Form.Group controlId="formFileMultiple" className="mb-3">
             <Form.Label>
-              <h4> Imágenes Carrusel</h4>
+              <h4 className="text-white"> Imágenes Carrusel</h4>
             </Form.Label>
             <Form.Control type="file" multiple />
-            <h6 className="text-center">
+            <h6 className="text-center text-white">
               Se recomienda una resolución de 1580 x 450 pixeles para una mejor
               visualización.
             </h6>
@@ -29,10 +28,10 @@ export function Params() {
           <br />
           <Form.Group controlId="formFile" className="mb-3">
             <Form.Label>
-              <h4> Imagen banner inferior</h4>
+              <h4 className="text-white"> Imagen banner inferior</h4>
             </Form.Label>
             <Form.Control type="file" />
-            <h6 className="text-center">
+            <h6 className="text-center text-white">
               Se recomienda una resolución de 1080 x 150 pixeles para una mejor
               visualización.
             </h6>

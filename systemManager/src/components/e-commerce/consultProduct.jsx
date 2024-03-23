@@ -10,7 +10,10 @@ import { Button } from "react-bootstrap";
 import { ProductModal } from "../modals/productModal";
 import { StockModal } from "../modals/adjustStockModal";
 import { EditProductModal } from "../modals/editProductModal";
+import { ConfirmDeleteModal } from "../modals/confirmDelete";
 import Footer from "../Others/footer";
+import { PageNumber } from "../Others/pagination";
+import { exportToExcel } from "../../services/exportData";
 
 export function ConsultProduct() {
   const categoriesData = useQuery(["categories"], fetchCategories, {
@@ -25,28 +28,33 @@ export function ConsultProduct() {
     );
   };
 
+
+  //optimizar
   const [modalCreateShow, setModalCreateShow] = React.useState(false);
   const [modalUpdateShow, setModalUpdateShow] = React.useState(false);
   const [modalEditShow, setModalEditShow] = React.useState(false);
+  const [modalDeleteShow, setModalDeleteShow] = React.useState(false);
 
-  const [productoelegido, setProductoElegido] = React.useState('');
-  const [tituloProducto, setTitulo] = React.useState('');
-  const [descripcionProducto, setDescripcionProducto] = React.useState('');
-  const [codigoProducto, setCodigoProducto] = React.useState('');
-  const [fotoProducto, setFotoProducto] = React.useState('');
-  const [precioProducto, setPrecioProducto] = React.useState('');
-  const [categoriaProducto, setCategoriaProducto] = React.useState('');
+  const [productoelegido, setProductoElegido] = React.useState("");
+  const [tituloProducto, setTitulo] = React.useState("");
+  const [descripcionProducto, setDescripcionProducto] = React.useState("");
+  const [codigoProducto, setCodigoProducto] = React.useState("");
+  const [productToDelete, setCodigoBorrar] = React.useState("");
+  const [fotoProducto, setFotoProducto] = React.useState("");
+  const [precioProducto, setPrecioProducto] = React.useState("");
+  const [categoriaProducto, setCategoriaProducto] = React.useState("");
+//optimizar
 
   const { data, isLoading, refetch } = useQuery(["products"], fetchProducts, {
     staleTime: 0,
   });
   const Productos = data;
 
-  const handleDeleteProduct = async (productId) => {
-    await deleteProduct(productId);
-    await refetch();
-    window.location.reload();
-  };
+    // const handleDeleteProduct = async (productId) => {
+  //   await deleteProduct(productId);
+  //   await refetch();
+  //   window.location.reload();
+  // };
 
   if (isLoading) return "Cargando...";
 
@@ -63,7 +71,7 @@ export function ConsultProduct() {
             Agregar nuevo producto
           </Button>
         </Container>
-        <Table bordered hover variant="dark" responsive>
+        <Table bordered hover variant="dark" id="ProductTable" responsive>
           <thead>
             <tr>
               <th>#</th>
@@ -90,9 +98,9 @@ export function ConsultProduct() {
                 <td>{findCategory(producto.categoria)}</td>
                 <td>
                   <Container className="d-md-flex justify-content-center">
-                  <Button
+                    <Button
                       className="btn btn-primary "
-                      style={{ marginLeft: "10px", margin:"5px"}}
+                      style={{ marginLeft: "10px", margin: "5px" }}
                       onClick={() => {
                         setModalEditShow(true);
                         setProductoElegido(producto.id);
@@ -108,7 +116,7 @@ export function ConsultProduct() {
                     </Button>
                     <Button
                       className="btn btn-warning "
-                      style={{ marginLeft: "10px", margin:"5px" }}
+                      style={{ marginLeft: "10px", margin: "5px" }}
                       onClick={() => {
                         setProductoElegido(producto.id);
                         setModalUpdateShow(true);
@@ -119,9 +127,11 @@ export function ConsultProduct() {
                     </Button>
                     <Button
                       className="btn btn-danger "
-                      variant=""
-                      style={{ marginLeft: "10px", margin:"5px" }}
-                      onClick={() => handleDeleteProduct(producto.id)}
+                      style={{ marginLeft: "10px", margin: "5px" }}
+                      onClick={() => {
+                        setCodigoBorrar(producto.id);
+                        setModalDeleteShow(true);                        
+                      }}
                     >
                       Eliminar
                     </Button>
@@ -132,6 +142,15 @@ export function ConsultProduct() {
           </tbody>
         </Table>
       </Container>
+        <Container className="d-md-flex my-4 justify-content-end">
+          <Button
+            className="btn btn-info"
+            style={{ marginLeft: "10px", marginRight: "10px" }}
+            onClick={() => exportToExcel("ProductTable", "Productos")}
+          >
+            Exportar datos a Excel
+          </Button>
+        </Container>
       <ProductModal
         show={modalCreateShow}
         onHide={() => setModalCreateShow(false)}
@@ -151,9 +170,14 @@ export function ConsultProduct() {
         codigoProd={codigoProducto}
         fotoProd={fotoProducto}
         precioProd={precioProducto}
-        categoriaProd={categoriaProducto}                
+        categoriaProd={categoriaProducto}
       />
-      <Footer/>
+      <ConfirmDeleteModal
+        show={modalDeleteShow}
+        onHide={() => setModalDeleteShow(false)}
+        id={productToDelete}              
+      />
+      <Footer />
     </>
   );
 }

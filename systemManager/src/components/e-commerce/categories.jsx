@@ -32,7 +32,7 @@ export function Category() {
           </Button>
         </Container>
         <br />
-        <Table striped bordered hover responsive>
+        <Table variant="dark" striped bordered hover responsive>
           <thead>
             <tr>
               <th>Id</th>
