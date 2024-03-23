@@ -18,7 +18,6 @@ export function NavBar() {
       expand="lg"
       sticky="top"
       bg="dark"
-      data-bs-theme="light"
     >
       <Container fluid>
         <Link to={"/"} />
@@ -42,9 +41,7 @@ export function NavBar() {
             navbarScroll
             placement="center"
           >
-            <LinkContainer to="/e-commerce/dashboard">
-              <Nav.Link className="text-color-white">Inicio</Nav.Link>
-            </LinkContainer>
+              <Nav.Link className="text-color-white" href="/e-commerce/dashboard">Inicio</Nav.Link>
             <Nav.Link
               className="text-color-white"
               href="/e-commerce/consultProduct"
@@ -66,6 +63,9 @@ export function NavBar() {
               href="/e-commerce/parameters"
             >
               Parámetros
+            </Nav.Link>
+            <Nav.Link className="text-color-white" href="/e-commerce/help">
+              Ayuda
             </Nav.Link>
             <Nav.Link className="text-color-white" href="/e-commerce/about">
               Acerca de...

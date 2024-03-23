@@ -15,6 +15,7 @@ import { Category } from "./components/e-commerce/categories";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ProtectedRoute } from "./components/protectedRoutes/protectedRoutes";
 import { AboutUs } from "./components/e-commerce/about";
+import { Help } from "./components/e-commerce/help";
 import { Params } from "./components/e-commerce/parameters";
 
 const queryClient = new QueryClient();
@@ -89,6 +90,15 @@ root.render(
                   <>
                     <NavBar />
                     <AboutUs />
+                  </>
+                }
+              ></Route>
+              <Route
+                path="/e-commerce/help"
+                element={
+                  <>
+                    <NavBar />
+                    <Help />
                   </>
                 }
               ></Route>

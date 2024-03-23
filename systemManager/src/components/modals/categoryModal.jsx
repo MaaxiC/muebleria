@@ -3,13 +3,13 @@ import Modal from "react-bootstrap/Modal";
 import { Form } from "react-bootstrap";
 import { useState } from "react";
 import { addCategory } from "../../services/products";
-
+import Swal from "sweetalert2";
 export function CategoryModal(props) {
   const [category, setCategory] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!category) return alert("Ingrese un nombre de categoría");
+    if (!category) return Swal.fire("Ingrese un nombre de categoría");
     await addCategory({ nombre: category });
     props.onHide();
     window.location.replace("/e-commerce/categories");

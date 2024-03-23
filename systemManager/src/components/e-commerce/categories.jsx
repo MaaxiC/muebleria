@@ -2,12 +2,17 @@ import { fetchCategories, deleteCategory } from "../../services/products";
 import { useQuery } from "@tanstack/react-query";
 import { Container, Table } from "react-bootstrap";
 import { CategoryModal } from "../modals/categoryModal";
+import { ConfirmDeleteModal } from "../modals/confirmDelete";
 import { Button } from "react-bootstrap";
 import Footer from "../Others/footer";
 import React from "react";
 
 export function Category() {
   const [modalShow, setModalShow] = React.useState(false);
+  const [modalDeleteShow, setModalDeleteShow] = React.useState(false);
+
+  const [productToDelete, setCodigoBorrar] = React.useState("");
+  const [tituloCategoria, setTituloCategoria] = React.useState("");
 
   const { data, isLoading, refetch } = useQuery(
     ["categories"],
@@ -48,16 +53,16 @@ export function Category() {
                 <td>
                   {/* <Button className="btn btn-primary">Editar</Button> */}
                   <Button
-                    className="btn btn-danger"
-                    onClick={async () => {
-                      deleteCategory(categoria.id);
-                      await refetch();
-                      window.location.reload();
-                    }}
-                    style={{ marginLeft: "10px" }}
-                  >
-                    Eliminar
-                  </Button>
+                      className="btn btn-danger "
+                      style={{ marginLeft: "10px", margin: "5px" }}
+                      onClick={() => {
+                        setCodigoBorrar(categoria.id);
+                        setTituloCategoria(categoria.nombre);
+                        setModalDeleteShow(true);
+                      }}
+                    >
+                      Eliminar
+                    </Button>
                 </td>
               </tr>
             ))}
@@ -66,6 +71,14 @@ export function Category() {
       </Container>
       <CategoryModal show={modalShow} onHide={() => setModalShow(false)} />
       <br />
+      <ConfirmDeleteModal
+        show={modalDeleteShow}
+        onHide={() => setModalDeleteShow(false)}
+        id={productToDelete}
+        titulo={tituloCategoria}
+        name="Categoría"
+        mensaje="la categoría "
+      />
       <Footer/>
     </>
   );

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -8,6 +9,14 @@ import { fetchCategories, fetchProducts } from "../../../services/Products";
 import { useQuery } from "@tanstack/react-query";
 
 const NavBar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const handleToggle = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
+  const handleDropdownOpen = () => setDropdownOpen(true);
+  const handleDropdownClose = () => setDropdownOpen(false);
+
   const { data } = useQuery(["categories"], fetchCategories, {
     staleTime: 60000,
   });
@@ -19,7 +28,7 @@ const NavBar = () => {
   const products = productsData.data;
 
   return (
-    <Navbar className="navbar-bg navbar-text fixed-top" expand="lg">
+    <Navbar className="navbar-bg navbar-text fixed-top" expand="lg" onToggle={handleToggle} expanded={isOpen}>
       <Container fluid>
         <Link to={"/"}>
           <img src="/src/images/nacar.ico" width="85px" alt="Nácar" />
@@ -27,13 +36,16 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <NavLink to={"/"} className="nav-link text-center">
+            <NavLink onClick={closeMenu} to={"/"} className="nav-link text-center">
               Inicio
             </NavLink>
             <NavDropdown
               title="categorías"
               id="basic-nav-dropdown"
               className="text-center ms-5"
+              show={dropdownOpen}
+              onMouseEnter={handleDropdownOpen}
+              onMouseLeave={handleDropdownClose}
             >
               {data
                 ? data.map((data) => (
@@ -42,19 +54,20 @@ const NavBar = () => {
                       to={`/categories/${data.id}`}
                       className="navbar-bg navbar-text text-center py-2 "
                       key={data.id}
+                      onClick={closeMenu}
                     >
                       {data.nombre}
                     </NavDropdown.Item>
                   ))
                 : null}
             </NavDropdown>
-            <NavLink to={"/contact"} className="nav-link text-center">
+            <NavLink onClick={closeMenu} to={"/contact"} className="nav-link text-center">
               Contacto
             </NavLink>
-            <NavLink to={"/faq"} className="nav-link text-center">
+            <NavLink onClick={closeMenu} to={"/faq"} className="nav-link text-center">
               FAQ
             </NavLink>
-            <NavLink to={"/aboutus"} className="nav-link text-center">
+            <NavLink onClick={closeMenu} to={"/aboutus"} className="nav-link text-center">
               Sobre Nosotros
             </NavLink>
           </Nav>

@@ -1,4 +1,4 @@
-import { fetchCategories, fetchProductsByCategories } from "../../services/Products";
+import { fetchCategories } from "../../services/Products";
 import { useQuery } from "@tanstack/react-query";
 import Item from "../Item/Item";
 import Container from "react-bootstrap/Container";
