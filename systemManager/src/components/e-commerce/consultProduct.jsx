@@ -1,7 +1,7 @@
 import {
-  fetchProducts,
   fetchCategories,
   deleteProduct,
+  fetchProductsByPage
 } from "../../services/products";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
@@ -11,6 +11,8 @@ import { ProductModal } from "../modals/productModal";
 import { StockModal } from "../modals/adjustStockModal";
 import { EditProductModal } from "../modals/editProductModal";
 import Footer from "../Others/footer";
+import { useState } from "react";
+import { Row } from "react-bootstrap";
 
 export function ConsultProduct() {
   const categoriesData = useQuery(["categories"], fetchCategories, {
@@ -36,9 +38,10 @@ export function ConsultProduct() {
   const [fotoProducto, setFotoProducto] = React.useState('');
   const [precioProducto, setPrecioProducto] = React.useState('');
   const [categoriaProducto, setCategoriaProducto] = React.useState('');
+  const [page, setPage] = useState(1);
 
-  const { data, isLoading, refetch } = useQuery(["products"], fetchProducts, {
-    staleTime: 0,
+  const { data, isLoading, refetch } = useQuery(["productsTable", page], () => fetchProductsByPage(page), {
+    staleTime: 60000,
   });
   const Productos = data;
 
@@ -66,7 +69,6 @@ export function ConsultProduct() {
         <Table bordered hover variant="dark" responsive>
           <thead>
             <tr>
-              <th>#</th>
               <th>Nombre</th>
               <th>Descripcion</th>
               <th>Codigo</th>
@@ -78,9 +80,8 @@ export function ConsultProduct() {
             </tr>
           </thead>
           <tbody>
-            {Productos.map((producto, index) => (
+            {Productos.map((producto) => (
               <tr key={producto.id}>
-                <td>{index + 1}</td>
                 <td>{producto.nombre}</td>
                 <td>{producto.descripcion}</td>
                 <td>{producto.codigo}</td>
@@ -131,6 +132,24 @@ export function ConsultProduct() {
             ))}
           </tbody>
         </Table>
+        <Row>
+          <div className="d-flex justify-content-center">
+            <button
+              className="btn btn-primary"
+              onClick={() => setPage(page - 1)}
+              disabled={page === 1}
+            >
+              Anterior
+            </button>
+            <button
+              className="btn btn-primary"
+              onClick={() => setPage(page + 1)}
+              disabled={Productos.length < 10}
+            >
+              Siguiente
+            </button>
+          </div>
+        </Row>
       </Container>
       <ProductModal
         show={modalCreateShow}

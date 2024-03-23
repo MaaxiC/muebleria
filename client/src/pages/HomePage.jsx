@@ -1,7 +1,8 @@
 import Carousel from "../components/Carousel/Carousel";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import ItemList from "../components/ItemList/ItemList";
+// import ItemList from "../components/ItemList/ItemList";
+import ItemRec from "../components/ItemRec/ItemList";
 
 function HomePage() {
   return (
@@ -12,7 +13,8 @@ function HomePage() {
         </Row>
         <h1 className="text-center my-4">Recomendados</h1>
         <br />
-        <ItemList />
+        {/* <ItemList /> */}
+        <ItemRec />
       </Container>
       <br />
       <br />

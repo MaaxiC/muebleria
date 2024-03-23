@@ -9,6 +9,7 @@ export function CategoryModal(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!category) return alert("Ingrese un nombre de categoría");
     await addCategory({ nombre: category });
     props.onHide();
     window.location.replace("/e-commerce/categories");
