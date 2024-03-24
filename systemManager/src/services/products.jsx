@@ -12,6 +12,11 @@ export const fetchProductsByPage = async (page) => {
     return data;
 };
 
+export const fetchCount = async () => {
+    const { data } = await axios.get(`http://localhost:4000/api/productos/count`);
+    return data.maxPages;
+};
+
 export const addProduct = async (product) => {
     const { data } = await axios.postForm('http://localhost:4000/api/productos', product);
     return data;

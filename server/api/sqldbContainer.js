@@ -6,9 +6,14 @@ class SqldbContainer {
         this.table = table
     }
 
-    async getAll() {
+    async getAll(limit, offset) {
         try {
-            const rows = await this.config.from(this.table).select('*');
+            let rows = []
+            if (limit !== undefined && offset !== undefined) {
+                rows = await this.config.from(this.table).select('*').limit(limit).offset(offset);
+            } else {
+                rows = await this.config.from(this.table).select('*')
+            }
             return rows
         } catch (error) {
             return []

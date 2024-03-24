@@ -1,4 +1,4 @@
-import { fetchOrdersByPage, updateOrder } from "../../services/orders";
+import { fetchOrdersByPage, updateOrder, fetchCountOrders } from "../../services/orders";
 import { useQuery } from "@tanstack/react-query";
 import { Table } from "react-bootstrap";
 import { Container, Button } from "react-bootstrap";
@@ -17,6 +17,11 @@ export function Order() {
   });
 
   const Ordenes = data ? data : undefined;
+
+  const maxPagesCount = useQuery(["ordersCount"], () => fetchCountOrders(), {
+    staleTime: 60000,
+  });
+  const maxPages = maxPagesCount?.data;
 
   const changeOrder = async (id, estado) => {
     try {
@@ -42,7 +47,6 @@ export function Order() {
         <Table id="OrderTable" variant="dark" striped bordered hover responsive>
           <thead>
             <tr>
-              <th>#</th>
               <th>Nombre</th>
               <th>Apellido</th>
               <th>Dni</th>
@@ -56,7 +60,6 @@ export function Order() {
           <tbody>
             {Ordenes?.map((orden, index) => (
               <tr key={orden.id}>
-                <td>{orden.id}</td>
                 <td>{orden.nombre}</td>
                 <td>{orden.apellido}</td>
                 <td>{orden.dni}</td>
@@ -120,7 +123,7 @@ export function Order() {
             <button
               className="btn btn-primary"
               onClick={() => setPage(page + 1)}
-              disabled={Ordenes?.length < 10 || !Ordenes?.length}
+              disabled={(maxPages && page === maxPages) || maxPages === 0}
             >
               Siguiente
             </button>

@@ -115,6 +115,20 @@ class OrderController {
         .send({ status: "error", error: ERROR.MESSAGE.INTERNAL_ERROR });
     }
   }
+
+  static async getCountOrders(req, res) {
+    try { 
+      const response = await OrderApi.constructor.getCount();
+      const entry = response[0];
+      const value = entry['COUNT(*)']
+      const maxPages = Math.ceil(value / 10) //dividido la cantidad de elementos por pagina
+      res.send({ maxPages });
+    } catch (error) {
+      res
+        .status(500)
+        .send({ status: "error", error: ERROR.MESSAGE.INTERNAL_ERROR });
+    }
+  }
 }
 
 export { OrderController };

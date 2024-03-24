@@ -40,7 +40,6 @@ export function Category() {
         <Table variant="dark" striped bordered hover responsive>
           <thead>
             <tr>
-              <th>Id</th>
               <th>Nombre</th>
               <th>Acciones</th>
             </tr>
@@ -48,7 +47,6 @@ export function Category() {
           <tbody>
             {Categorias.map((categoria) => (
               <tr key={categoria.id}>
-                <td>{categoria.id}</td>
                 <td>{categoria.nombre}</td>
                 <td>
                   <Button

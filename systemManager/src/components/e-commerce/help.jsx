@@ -8,7 +8,7 @@ export function Help() {
   return (
     <>
       <Container className="mb-4">
-        <Row className="justify-content-center mt-5">
+        <Row className="justify-content-center m-5">
           <Col md="auto">
             <Card className="bg-dark">
               <Card.Img variant="top" src="" />
@@ -27,7 +27,6 @@ export function Help() {
             </Card>
           </Col>
         </Row>
-        <br />
       </Container>
       <Footer />
     </>

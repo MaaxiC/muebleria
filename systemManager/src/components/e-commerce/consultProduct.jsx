@@ -1,6 +1,7 @@
 import {
   fetchCategories,
   fetchProductsByPage,
+  fetchCount
 } from "../../services/products";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
@@ -52,6 +53,11 @@ export function ConsultProduct() {
     }
   );
   const Productos = data;
+
+  const maxPagesCount = useQuery(["productsCount"], () => fetchCount(), {
+    staleTime: 60000,
+  });
+  const maxPages = maxPagesCount?.data;
 
   if (isLoading) return "Cargando...";
 
@@ -148,7 +154,7 @@ export function ConsultProduct() {
             <button
               className="btn btn-primary"
               onClick={() => setPage(page + 1)}
-              disabled={Productos?.length < 10 || !Productos?.length}
+              disabled={(maxPages && page === maxPages) || maxPages === 0}
             >
               Siguiente
             </button>

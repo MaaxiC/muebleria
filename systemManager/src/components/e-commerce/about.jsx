@@ -28,12 +28,14 @@ export function AboutUs() {
           </Col>
         </Row>
         <br />
-        <h4 className="text-center text-white">Contacto</h4>
+        <h4 className="text-center text-white mb-4">Contacto</h4>
         <Container className="text-center">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/2560px-Gmail_icon_%282020%29.svg.png" width={300} alt=""/>
-          <br />
-          <br />
-          <a className="text-white" href="https://gmail.com/" target="_blank" rel="noreferrer">josuedominguez052@gmail.com</a>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Gmail_icon_%282020%29.svg/2560px-Gmail_icon_%282020%29.svg.png" width="250" height="200" alt=""/>
+          <Row className="justify-content-center mt-4">
+            <h3>
+              <a className="text-white" href="https://gmail.com/" target="_blank" rel="noreferrer">josuedominguez052@gmail.com</a>
+            </h3>
+          </Row>
         </Container>
       </Container>
       <Footer />

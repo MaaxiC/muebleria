@@ -18,6 +18,18 @@ class OrderDao extends SqldbContainer {
       return error
    }
   }
+
+  static async getCount() {
+    try {
+      const row = await knex(config.SQL_DB).raw(`select COUNT(*) from ${(config.collection.orders)}`)
+      if (row == 0) {
+          return undefined 
+      }
+      return row
+   } catch (error) {
+      return error
+   }
+  }
 }
 
 export { OrderDao };

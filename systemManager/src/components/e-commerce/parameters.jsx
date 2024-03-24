@@ -69,7 +69,7 @@ export function Params() {
           <hr />
           <p className="mb-0">
             Si tienes dudas sobre esta sección, siempre puedes consultar el
-            apartado de <a href="/">AYUDA, haciendo click aquí.</a>
+            apartado de <a href="/e-commerce/help">AYUDA, haciendo click aquí.</a>
           </p>
         </Alert>
         <br />

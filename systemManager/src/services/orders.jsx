@@ -10,6 +10,11 @@ export const fetchOrdersByPage = async (page) => {
     return data;
 };
 
+export const fetchCountOrders = async () => {
+    const { data } = await axios.get(`http://localhost:4000/api/ordenes/count`);
+    return data.maxPages;
+};
+
 export const updateOrder = async (id, order) => {
     const { data } = await axios.put(`http://localhost:4000/api/ordenes/${id}`, order);
     return data;
